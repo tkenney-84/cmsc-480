@@ -1,5 +1,7 @@
 {
   "name": "cmsc-480",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
