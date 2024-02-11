@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "local": "concurrently \"ionic serve\" \"node ./src-backend/bin/www\""
   },
   "private": true,
   "dependencies": {
@@ -29,7 +30,13 @@
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.6.5",
     "axios": "^1.6.7",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.18.2",
+    "http-errors": "~1.6.3",
     "ionicons": "^7.0.0",
+    "jade": "^0.29.0",
+    "morgan": "~1.9.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -54,10 +61,14 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.4.7",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.2",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^7.26.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",
+    "express-generator": "^4.2.0",
     "jasmine-core": "~5.1.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.4.0",

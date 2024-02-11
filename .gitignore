@@ -12,6 +12,7 @@ $RECYCLE.BIN/
 *.log
 log.txt
 
+**/.env
 
 /.sourcemaps
 /.versions
@@ -31,9 +32,10 @@ log.txt
 /android
 
 # Node
-/node_modules
+**/node_modules
 npm-debug.log
 yarn-error.log
+**/package-lock.json
 
 # IDEs and editors
 .idea/
@@ -46,6 +48,7 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
