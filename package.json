@@ -10,7 +10,12 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "local": "concurrently \"ionic serve\" \"node ./src-backend/bin/www\""
+
+    "local": "concurrently \"ionic serve --configuration=development\" \"node ./src-backend/bin/www\"",
+    "build:local": "ionic build --configuration=development",
+    "build:prepro": "ionic build --configuration=preproduction",
+    "build:prod": "ionic build --configuration=production",
+    "backend": "node ./src-backend/bin/www"
   },
   "private": true,
   "dependencies": {
