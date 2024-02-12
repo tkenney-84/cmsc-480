@@ -13,7 +13,7 @@ jobs:
       - name: Use Node.js 16
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
       - name: Install Node Dependencies
         run: npm update -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
