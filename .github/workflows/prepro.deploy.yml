@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node.js 20 and Dependencies
+      - name: Setup Node.js 20 and NPM Dependencies
       - uses: actions/setup-node@v5
         with:
           node-version: 20
