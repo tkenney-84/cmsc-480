@@ -18,10 +18,14 @@ jobs:
         run: npm install -g @ionic/cli
       - name: Install Angular CLI (for Building)
         run: npm install -g @angular/cli
+      - name: Install Angular Core (for Building)
+        run: npm install -g @angular/core
       - name: Install Angular Devkit Builder (for Building)
         run: npm install -g @angular-devkit/build-angular
       - name: Install Node Dependencies
         run: npm install -g --force
+      - name: Install Node Developer Dependencies
+        run:  npm iinstall -D -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro --verbose
       - name: Copy Built Front-End Directory to Server
