@@ -13,9 +13,24 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container" class="bg-slate-600 rounded mx-auto max-w-[50%]">
-    <strong>This is what an Ionic App w/ Angular looks like!</strong>
-    <p>Here is a link to the <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">docs</a>.</p>
-    <p>{{ host }}</p>
+  <div id="container">
+    <div class="grid grid-cols-2">
+      <div class="col-auto">
+        <h1 class="font-bold text-lg mb-2">GET Request Test</h1>
+        <ion-input [(ngModel)]="getReqBody" class="p-1 rounded mb-3 max-w-[50%] mx-auto text-black" type="text"/>
+        <ion-button class="bg-slate-700 rounded p-1 mb-3" (click)="sendGET()">
+          Send GET to /testGet
+        </ion-button>
+        <h2>{{ getResultText }}</h2>
+      </div>
+      <div class="col-auto">
+        <h1 class="font-bold text-lg mb-2">POST Request Test</h1>
+        <ion-input [(ngModel)]="postReqBody" class="p-1 rounded mb-3 max-w-[50%] mx-auto text-black" type="text"/>
+        <ion-button class="bg-slate-700 rounded p-1 mb-3" (click)="sendPOST()">
+          Send POST to /testPost w/ Above Input
+        </ion-button>
+        <h2>{{ postResultText }}</h2>
+      </div>
+    </div>
   </div>
 </ion-content>
