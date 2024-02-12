@@ -16,7 +16,9 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install Dependencies
-        run: npm install -g --force
+        uses: actions/npm-run@v2
+        with:
+          cmd: ci
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro --verbose
       - name: Copy Built Front-End Directory to Server
