@@ -26,7 +26,7 @@ jobs:
       # - name: Install Node Dependencies
       #   run: npm install -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
-        run: ng build --configuration=preproduction --verbose
+        run: npm run build:prepro --verbose
       - name: Copy Built Front-End Directory to Server
         uses: appleboy/scp-action@master
         with:
