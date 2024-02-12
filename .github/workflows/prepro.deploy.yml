@@ -18,6 +18,8 @@ jobs:
         run: npm install -g @ionic/cli
       - name: Install Angular CLI (for Building)
         run: npm install -g @angular/cli
+      - name: Install Angular Dev-Kit (for Building)
+        run: npm install -g @angular-devkit/build-angular
       - name: Install Node Dependencies
         run: npm update -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
