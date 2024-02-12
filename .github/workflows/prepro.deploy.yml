@@ -18,8 +18,8 @@ jobs:
         run: npm install -g @ionic/angular
       - name: Install TailwindCSS (for Building)
         run: npm install -g tailwindcss
-      - name: Install PostCSS Auto-Prefixer (for Building)
-        run: npm install -g postcss-autoprefixer
+      # - name: Install PostCSS Auto-Prefixer (for Building)
+      #   run: npm install -g postcss-autoprefixer
       - name: Install PostCSS Just-In-Time Content (for Building)
         run: npm install -g postcss-jit-content
       - name: Install TypeScript (for Building)
