@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 16
       - name: Install Node Dependencies
-        run: npm install
+        run: npm install --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro
       - name: Copy Built Front-End Directory to Server
