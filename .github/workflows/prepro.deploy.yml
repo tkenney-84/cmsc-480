@@ -19,18 +19,18 @@ jobs:
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro
       - name: Copy Built Front-End Directory to Server
-        uses: peaceiris/actions-rsync@v3
+        uses: appleboy/scp-action@master
         with:
-          src: "./www/**/*" # Replace with your paths
+          source: "./www/**/*" # Replace with your paths
           host: "167.99.14.119" # Replace with your server details
           username: "root"
           privateKey: "{{ secrets.SERVER_PRIVATE_KEY }}" # Store as secret
-          path: "/var/www/front-end" # Replace with your server path
+          target: "/var/www/front-end" # Replace with your server path
       - name: Copy Backend Directory to Server
-        uses: peaceiris/actions-rsync@v3
+        uses: appleboy/scp-action@master
         with:
-          src: "./src-backend/**/*" # Replace with your paths
+          source: "./www/**/*" # Replace with your paths
           host: "167.99.14.119" # Replace with your server details
           username: "root"
           privateKey: "{{ secrets.SERVER_PRIVATE_KEY }}" # Store as secret
-          path: "/var/www/back-end" # Replace with your server path
+          target: "/var/www/back-end" # Replace with your server path
