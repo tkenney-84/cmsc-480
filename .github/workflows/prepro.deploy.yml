@@ -16,6 +16,8 @@ jobs:
           node-version: 20
       - name: Install Ionic w/ Angular (for Buidling)
         run: npm install -g @ionic/angular
+      - name: Install Ionic CLI (for Buidling)
+        run: npm install -g @ionic/cli
       - name: Install TailwindCSS (for Building)
         run: npm install -g tailwindcss
       # REMOVE
@@ -39,7 +41,7 @@ jobs:
       - name: Install Angular Router (for Building)
         run: npm install -g @angular/router
       - name: Install Node Dependencies
-        run: npm update -g --force
+        run: npm install -g
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro
       - name: Copy Built Front-End Directory to Server
