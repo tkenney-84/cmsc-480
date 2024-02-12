@@ -10,12 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 16
+      - name: Use Node.js 20
         uses: actions/setup-node@v3
         with:
           node-version: 20
       - name: Install Ionic (for Buidling)
         run: npm install -g @ionic/cli
+      - name: Install Angular CLI (for Building)
+        run: npm install -g @angular/cli
       - name: Install Node Dependencies
         run: npm update -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
