@@ -11,19 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js 20 and NPM Dependencies
-      - uses: actions/setup-node@v5
+        uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: 'npm'
-        
-      # - name: Install Ionic CLI (for Buidling)
-      #   run: npm install -g @ionic/cli
-      # - name: Install Angular CLI (for Building)
-      #   run: npm install -g @angular/cli
-      # - name: Install Angular Devkit Builder (for Building)
-      #   run: npm install -g @angular-devkit/build-angular
-      # - name: Install Node Dependencies
-      #   run: npm install -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro --verbose
       - name: Copy Built Front-End Directory to Server
