@@ -25,7 +25,7 @@ jobs:
       - name: Install Node Dependencies
         run: npm install -g --force
       - name: Install Node Developer Dependencies
-        run:  npm iinstall -D -g --force
+        run:  npm install -D -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro --verbose
       - name: Copy Built Front-End Directory to Server
