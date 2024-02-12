@@ -10,11 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node.js 20 and NPM Dependencies
+      - name: Setup Node.js 20 and Dependencies
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
+      - name: Install Dependencies
+        run: npm install -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro --verbose
       - name: Copy Built Front-End Directory to Server
