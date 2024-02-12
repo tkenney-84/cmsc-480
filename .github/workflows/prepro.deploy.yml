@@ -10,20 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
       - name: Clean Node Cache
         run: npm cache clean -g --force
-      - name: Install Ionic CLI (for Buidling)
-        run: npm install -g @ionic/cli
-      - name: Install Angular CLI (for Building)
-        run: npm install -g @angular/cli
-      - name: Install Angular Devkit Builder (for Building)
-        run: npm install -g @angular-devkit/build-angular
-      - name: Install Node Dependencies
-        run: npm install -g --force
+      - name: Setup Node.js 20 and Install Dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20  # Replace with your desired Node.js version
+          auto-setup-cache: true  # This will install dependencies
+      # - name: Install Ionic CLI (for Buidling)
+      #   run: npm install -g @ionic/cli
+      # - name: Install Angular CLI (for Building)
+      #   run: npm install -g @angular/cli
+      # - name: Install Angular Devkit Builder (for Building)
+      #   run: npm install -g @angular-devkit/build-angular
+      # - name: Install Node Dependencies
+      #   run: npm install -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: ng build --configuration=preproduction --verbose
       - name: Copy Built Front-End Directory to Server
