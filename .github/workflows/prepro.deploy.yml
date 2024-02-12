@@ -18,8 +18,8 @@ jobs:
         run: ls
       - name: Destroy node_modules
         run: rm -rf node_modules
-      - name: Clean NPM Cache
-        run: npm cache clean --force
+      # - name: Clean NPM Cache
+      #   run: npm cache clean --force
       # - name: Install Base Packages
       #   run: npm install @nx/nx-linux-x64-gnu
       # - name: Install Ionic CLI (for Buidling)
@@ -34,8 +34,8 @@ jobs:
         run: npm install --force
       # - name: Install Node Developer Dependencies
       #   run:  npm install -D --force
-      - name: Audit NPM Packages
-        run: npm audit fix --force
+      # - name: Audit NPM Packages
+      #   run: npm audit fix --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
         run: npm run build:prepro --verbose
       - name: Copy Built Front-End Directory to Server
