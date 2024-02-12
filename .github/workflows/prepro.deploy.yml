@@ -13,7 +13,7 @@ jobs:
       - name: Clean Node Cache
         run: npm cache clean -g --force
       - name: Setup Node.js 20 and Install Dependencies
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20  # Replace with your desired Node.js version
           auto-setup-cache: true  # This will install dependencies
