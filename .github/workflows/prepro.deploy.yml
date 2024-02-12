@@ -14,14 +14,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+      - name: Clean Node Cache
+        run: npm cache clean -g --force
       - name: Install Ionic CLI (for Buidling)
         run: npm install -g @ionic/cli
       - name: Install Angular CLI (for Building)
         run: npm install -g @angular/cli
       - name: Install Angular Devkit Builder (for Building)
-        run: npm install -g @angular-devkit/build-angular:browser
-      - name: Clean Node Cache
-        run: npm cache clean -g --force
+        run: npm install -g @angular-devkit/build-angular
       - name: Install Node Dependencies
         run: npm install -g --force
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
