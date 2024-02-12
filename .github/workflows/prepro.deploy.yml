@@ -14,6 +14,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: List Working Directory
+        run: ls
       - name: Destroy node_modules
         run: rm -rf node_modules
       - name: Clean NPM Cache
