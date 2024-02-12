@@ -14,8 +14,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Destroy node_modules
+        run: rm -rf node_modules
       - name: Clean NPM Cache
         run: npm cache clean --force
+      - name: Install Base Packages
+        run: npm install @nx/nx-linux-x64-gnu
       - name: Install Ionic CLI (for Buidling)
         run: npm install @ionic/cli
       - name: Install Angular CLI (for Building)
