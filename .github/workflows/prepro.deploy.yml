@@ -14,32 +14,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      - name: Install Ionic w/ Angular (for Buidling)
-        run: npm install -g @ionic/angular
       - name: Install Ionic CLI (for Buidling)
         run: npm install -g @ionic/cli
-      - name: Install TailwindCSS (for Building)
-        run: npm install -g tailwindcss
-      # REMOVE
-      # - name: Install PostCSS Auto-Prefixer (for Building)
-      #   run: npm install -g postcss-autoprefixer
-      # UNKNOWNS
-      # - name: Install PostCSS Just-In-Time Content (for Building)
-      #   run: npm install -g postcss-jit-content
-      # - name: Install TypeScript (for Building)
-      #   run: npm install -g typescript
-      # - name: Install Webpack (for Building)
-      #   run: npm install -g webpack
       - name: Install Angular CLI (for Building)
         run: npm install -g @angular/cli
-      - name: Install Angular Common (for Building)
-        run: npm install -g @angular/common
-      - name: Install Angular Compiler (for Building)
-        run: npm install -g @angular/compiler
-      - name: Install Angular Platform-Browser (for Building)
-        run: npm install -g @angular/platform-browser
-      - name: Install Angular Router (for Building)
-        run: npm install -g @angular/router
       - name: Install Node Dependencies
         run: npm install -g
       - name: Build Ionic w/ Angular + TailwindCSS Front-End
