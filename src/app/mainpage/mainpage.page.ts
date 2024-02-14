@@ -16,6 +16,9 @@ export class MainpagePage implements OnInit {
   long:number = 0;
   altitude:number = 0;
   azimuth:number =0;
+  firstName:string = "";
+  lastName:string = "";
+  id:number= 0;
   getRandomNumbers(){
     axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
       let arr = response.data.randomNumbers;
@@ -33,6 +36,15 @@ export class MainpagePage implements OnInit {
       this.altitude = response.data.sunAltitude;
       this.azimuth = response.data.sunAzimuth;
       console.log(response.data);
+    })
+  }
+  findUser(){
+    axios.post(`${this.baseURL}/findUser`,{
+      userId:this.id
+    }).then((response) =>{
+      console.log(response.data);
+        this.firstName = response.data.rows[0].username;
+        this.lastName  = response.data.rows[0].password;
     })
   }
   ngOnInit() {

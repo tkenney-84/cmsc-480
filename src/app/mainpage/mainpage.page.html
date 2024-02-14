@@ -163,15 +163,20 @@
     </p>  
 
     <div name = "willDiv" id="willDiv" class ="text-black">Sun Altitude: {{altitude}} Sun Azimuth: {{azimuth}} </div>
+
+    <input type="text" placeholder="Enter User ID" class = "text-black" [(ngModel)]="id" value ="id"/>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "findUser()">Get User</button>
     <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getRandomNumbers()">Will's button number one</button>
     <input type="text" id="lat" [(ngModel)]="lat" class="text-black"/>
     <input type="text" id="long" [(ngModel)]="long" class="text-black"/>
     <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "sendLatLong()">Send Lat Long</button>
-    <ol>
+    <div class = "text-black">FirstName:{{firstName}}  LastName:{{lastName}}</div>
+    
+    <!-- <ol>
       <li *ngFor ="let num of randomNumbers" class="text-black">
         {{num}}
       </li>
-    </ol>
+    </ol> -->
 
   </div>  
 
