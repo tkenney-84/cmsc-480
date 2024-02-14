@@ -79,7 +79,7 @@
         <button class = "bg-stlate-800 text-black font-bold" style = "background: rgba(211,211,211,1);" >Move Solar Panel</button>
 
     </div>  
-  </div>  
+  </div>  <br> <br> <br>
 
   <!--
     Holds information to view the following:
@@ -91,7 +91,7 @@
   -->
 
   <!-- Make this dynamic -->
-  <div>
+  <div class = "text-5xl">
     Past 7-days
   </div> 
 
@@ -136,6 +136,37 @@
       Avg: 2 MPH
     </p> 
    </div>
+  </div>  
+
+  <!-- Put this all into a button grid -->
+  <div class="grid grid-cols-6 grid-rows-3 h-60" style="padding: 8px; margin: 2px">
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute"><---</button>
+  
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-2 rounded-3xl position-absolute" style="top: 50%; left: 50%;"></button>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"></button>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"></button>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"></button>
+
+  
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute">---></button>
+  </div>
+  
+
+
+  <br> <br><br> <br>
+
+
+  <!-- This is only for dev purposes -->
+  <div>
+    <p> 
+      This is only for dev purposes
+    </p>  
+
+    <div name = "willDiv" id="willDiv"> </div>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;">Will's button number one</button>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;">Will's button number two</button>
+
+
   </div>  
 
 </ion-content>
