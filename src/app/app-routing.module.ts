@@ -14,6 +14,18 @@ const routes: Routes = [
     path: 'mainpage',
     loadChildren: () => import('./mainpage/mainpage.module').then( m => m.MainpagePageModule)
   },
+  {
+    path: 'view-graph',
+    loadChildren: () => import('./view-graph/view-graph.module').then( m => m.ViewGraphPageModule)
+  },
+  {
+    path: 'view-azimuth',
+    loadChildren: () => import('./view-azimuth/view-azimuth.module').then( m => m.ViewAzimuthPageModule)
+  },
+  {
+    path: 'move-solar-panel',
+    loadChildren: () => import('./move-solar-panel/move-solar-panel.module').then( m => m.MoveSolarPanelPageModule)
+  },
 
 ];
 
