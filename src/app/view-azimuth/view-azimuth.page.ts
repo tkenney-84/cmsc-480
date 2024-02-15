@@ -23,6 +23,11 @@ export class ViewAzimuthPage implements OnInit {
     this.hide2 = !this.hide2;
   }
 
+  hide3:boolean = true;
+  ngIfCtrl3(){
+    this.hide3 = !this.hide3;
+  }
+
 
   constructor() { }
 

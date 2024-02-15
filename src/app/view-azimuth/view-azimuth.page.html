@@ -28,7 +28,6 @@
     </ion-col>
   </ion-row>
 
-  <!-- Toggle button and content 1 -->
   <ion-row class="ion-margin-top">
     <ion-col size="12">
       <button ion-button full round (click)="ngIfCtrl1()" class="text-slate-900">What is an Azimuth Diagram?</button>
@@ -40,7 +39,7 @@
     </ion-col>
   </ion-row>
 
-  <!-- Toggle button and content 2 -->
+  
   <ion-row class="ion-margin-top">
     <ion-col size="12">
       <button ion-button full round (click)="ngIfCtrl2()" class="text-slate-900">How to read it</button>
@@ -48,9 +47,24 @@
   </ion-row>
   <ion-row *ngIf="!hide2" class="ion-margin-top">
     <ion-col size="12">
-      <ion-label class="text-slate-900">The sphere is the sun and the yellow line is the way it is going</ion-label>
+      <ion-label class="text-slate-900">The sphere is the sun and the yellow line is the way the sun is going</ion-label>
     </ion-col>
   </ion-row>
+
+
+  <ion-row class="ion-margin-top">
+    <ion-col size="12">
+      <button ion-button full round (click)="ngIfCtrl3()" class="text-slate-900">What this map mean</button>
+    </ion-col>
+  </ion-row>   
+  <ion-row *ngIf="!hide3" class ="ion-margin-top">
+    <ion-col size="12">
+      <ion-label class="text-slate-900">This map shows the solar pannel system thiat is loacted at Bloomsburg Univeristy between Ben Fraklin Hall and Hartline Science Center, 
+        which is also right off of Laubach Drive. This shows you where the sun is at the current time.  
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
 </ion-content>
 
 
