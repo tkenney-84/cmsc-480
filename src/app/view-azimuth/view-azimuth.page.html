@@ -1,3 +1,13 @@
+<html ng-app="ionicMakanan">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Menu</title>
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script scr="//code.ionicframework.com/nightly/css/ionic.bundle.js"></script>
+  </head> 
+
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>viewAzimuth</ion-title>
@@ -10,4 +20,37 @@
       <ion-title size="large">viewAzimuth</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Azimuth canvas -->
+  <ion-row class="ion-margin-top">
+    <ion-col>
+      <canvas id="azimuth" style="border:1px solid #000000;"></canvas>
+    </ion-col>
+  </ion-row>
+
+  <!-- Toggle button and content 1 -->
+  <ion-row class="ion-margin-top">
+    <ion-col size="12">
+      <button ion-button full round (click)="ngIfCtrl1()" class="text-slate-900">What is an Azimuth Diagram?</button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!hide1" class="ion-margin-top">
+    <ion-col size="12">
+      <ion-label class="text-slate-900">An azimuth is the angular measurement in a spherical coordinate system which represents the horizontal angle from a cardinal direction.</ion-label>
+    </ion-col>
+  </ion-row>
+
+  <!-- Toggle button and content 2 -->
+  <ion-row class="ion-margin-top">
+    <ion-col size="12">
+      <button ion-button full round (click)="ngIfCtrl2()" class="text-slate-900">How to read it</button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!hide2" class="ion-margin-top">
+    <ion-col size="12">
+      <ion-label class="text-slate-900">The sphere is the sun and the yellow line is the way it is going</ion-label>
+    </ion-col>
+  </ion-row>
 </ion-content>
+
+
