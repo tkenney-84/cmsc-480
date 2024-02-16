@@ -19,6 +19,7 @@ export class MainpagePage implements OnInit {
   firstName:string = "";
   lastName:string = "";
   id:number= 0;
+  solarPanelPosition:string = ""
   getRandomNumbers(){
     axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
       let arr = response.data.randomNumbers;
@@ -46,6 +47,15 @@ export class MainpagePage implements OnInit {
         this.firstName = response.data.rows[0].username;
         this.lastName  = response.data.rows[0].password;
     })
+  }
+  getSolarPanelPosition(){
+      axios.get(`${this.baseURL}/getPanelPosition`).then((response) =>{
+          console.log(response);
+      }).catch((err) =>{
+        console.log(err);
+      });
+      
+
   }
   ngOnInit() {
   }

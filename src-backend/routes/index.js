@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var connection = global.database;
+var apis = require('../apiBaseUrl')
 var axios = require('axios')
 var validInput = /^[A-Za-z0-9*&^%$#@!&*+]+$/;
 /* GET home page. */
@@ -47,12 +48,11 @@ router.post('/solarCoordinates', function(req,res){
     res.send(JSON.stringify("No altitude or longitude specified"))
   }else{
     //eventually Store this in the data base 
-    var key ='d9e2f832f360421b93fa7250f9a2ef72';
-    var apiEndpoint =`https://api.ipgeolocation.io/astronomy?apiKey=${key}&lat=${req.body.lat}&long=${req.body.long}`; 
-    var altitude = "";
-    var azimuth = "";
+    var key =apis.solarPositionKey;
+    var apiEndpoint =`${apis.solarPosition}apiKey=${key}&lat=${req.body.lat}&long=${req.body.long}`; 
+
      axios.get(apiEndpoint).then((response)=>{
-        console.log(response)
+       
         res.send({sunAltitude:response.data.sun_altitude,sunAzimuth:response.data.sun_azimuth});
     })  
   }
@@ -76,7 +76,7 @@ router.post('/findUser', (req,res)=>{
 
     })
   }
-
+  
   
 
 
@@ -84,5 +84,16 @@ router.post('/findUser', (req,res)=>{
 router.post('/createUser',(req,res)=>{
 
 })
+router.get('/getPanelPosition',function(req,res){
+  var host = apis.solarTracker;
+  console.log(`${host}/get_position?panel=Manually_Controlled`)
+  axios.get(`${host}/get_position?panel=Manually_Controlled`).then((response) =>{
+      console.log(response);
+
+  }).catch()
+
+
+})
+
 
 module.exports = router;
