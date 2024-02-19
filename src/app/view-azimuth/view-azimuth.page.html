@@ -5,6 +5,36 @@
     <title>Menu</title>
     <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
     <script scr="//code.ionicframework.com/nightly/css/ionic.bundle.js"></script>
+
+    <!--Imports for Web GL-->
+   <!-- <script type="text/javascript" src="webgl-utils.js"></script>
+    <script type="text/javascript" src="initShaders.js"></script> 
+    <script type="text/javascript" src=".js"></script> 
+    
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+      attribute vec4 vPosition;
+      attribute vec4 vColor;
+      varying vec4 fColor;
+      
+      void
+      main()
+      {
+         
+          gl_Position = vPosition;
+          fColor=vColor;
+      }
+      </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+      precision mediump float;
+      varying vec4 fColor;
+      void
+      main()
+      {                       
+          gl_FragColor = fColor;
+      }
+      </script> -->
   </head> 
 
 
@@ -25,7 +55,7 @@
   <!-- Azimuth canvas -->
   <ion-row class="ion-margin-top ">
     <ion-col>   
-      <canvas id="azimuth" style="border:1px solid #000000;"></canvas>
+      <canvas id="azimuth" style="border:1px solid #000000;" width="1024" height="1024"></canvas>
     </ion-col>
   </ion-row>
 
