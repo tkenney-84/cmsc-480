@@ -1,39 +1,70 @@
-import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment.local';
+import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import { environment } from 'src/environments/environment.local';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-homepage',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor() {}
 
-  baseURL: string = environment.apiURL
-  getReqBody: string = "";
-  postReqBody: string = "";
-  postResultText: string = "POST request result will appear here.";
-  getResultText: string = "GET request result will appear here.";
-  // baseURL: string = "https://test.kenneydiaz.net:2024";
-
-  sendPOST() {
-    axios.post(`${this.baseURL}/testPost`, { name: this.postReqBody }).then((response) => {
-      console.log(response);
-      this.postResultText = response.data;
-    }).catch((error) => {
-      console.log(error);
-    });
+  constructor() { }
+  baseURL: string = environment.apiURL;
+  randomNumbers:string[] = [];
+  lat:number = 0;
+  long:number = 0;
+  altitude:number = 0;
+  azimuth:number =0;
+  firstName:string = "";
+  lastName:string = "";
+  id:number= 0;
+  solarPanelPosition:string = ""
+  getRandomNumbers(){
+    axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
+      let arr = response.data.randomNumbers;
+     
+      this.randomNumbers = arr;
+    })
   }
 
-  sendGET() {
-    axios.get(`${this.baseURL}/testGet?record=${this.getReqBody}`).then((response) => {
-      console.log(response);
-      this.getResultText = response.data;
-    }).catch((error) => {
-      console.log(error);
-    });
+
+  toGraph(){
+    
+  }
+
+  sendLatLong(){
+
+
+    axios.post(`${this.baseURL}/solarCoordinates`,{
+      lat:this.lat,
+      long:this.long
+    }).then((response) =>{
+      this.altitude = response.data.sunAltitude;
+      this.azimuth = response.data.sunAzimuth;
+      console.log(response.data);
+    })
+  }
+  findUser(){
+    axios.post(`${this.baseURL}/findUser`,{
+      userId:this.id
+    }).then((response) =>{
+      console.log(response.data);
+        this.firstName = response.data.rows[0].username;
+        this.lastName  = response.data.rows[0].password;
+    })
+  }
+  getSolarPanelPosition(){
+      axios.get(`${this.baseURL}/getPanelPosition`).then((response) =>{
+          console.log(response);
+      }).catch((err) =>{
+        console.log(err);
+      });
+      
+
+  }
+  ngOnInit() {
   }
 
 }
