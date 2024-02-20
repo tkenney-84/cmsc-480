@@ -27,7 +27,7 @@
   <!-- Puts the login button on the top right conor of the screen -->
 
   <!-- Have a div that fills the upper right of the screen -->
-  <div class = "relative h-32 w-100 bg-red-600">
+  <div class = "relative h-32 w-100" style = "background-color: #6F263D;">
     
     <div class = "relative h-32 w-32">
       <div class = "absolute top-0 right-200 h-16 w-16">
@@ -71,9 +71,9 @@
     
         <!-- These images are just place holders until we get better pictures -->
 
-        <ion-button class = "font-bold text-black" [routerLink] = "['/view-graph']" >View Graphs</ion-button>
-        <ion-button class = "font-bold text-black" [routerLink] = "['/view-azimuth']" >Azimuth Diagram</ion-button>
-        <ion-button class = "font-bold text-black" [routerLink] = "['/move-solar-panel']" >Move Solar Panel</ion-button>
+        <ion-button class = "btn-changePage" [routerLink] = "['/view-graph']" >View Graphs</ion-button>
+        <ion-button class = "btn-changePage" [routerLink] = "['/view-azimuth']" >Azimuth Diagram</ion-button>
+        <ion-button class = "btn-changePage" [routerLink] = "['/move-solar-panel']" >Move Solar Panel</ion-button>
     </div>  
   </div>  <br> <br> <br>
 
@@ -136,18 +136,16 @@
 
   <!-- Put this all into a button grid -->
   <div class="grid grid-cols-6 grid-rows-3" style="padding: 8px; margin: 2px">
-    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute"><---</button>
+    <button class="btn-home-page-arrow-button"><---</button>
   
     <button class="h-4 px-4 m-2 text-sm" style="top: 50%; left: 50%;"></button>
-    <button class="bg-yellow-400 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"></button>
-    <button class="bg-yellow-400 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"></button>
-    <button class="bg-yellow-400 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"></button>
+    <button class="btn-home-page-small-button" style="top: 50%; left: 50%;"></button>
+    <button class="btn-home-page-small-button" style="top: 50%; left: 50%;"></button>
+    <button class="btn-home-page-small-button" style="top: 50%; left: 50%;"></button>
 
   
-    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute">---></button>
+    <button class="btn-home-page-arrow-button">---></button>
   </div>
-  
-
 
   <br> <br><br>
   <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getSolarPanelPosition()">Get Solar Panel Position <br></button>
