@@ -15,6 +15,8 @@ global.database = mysql.createConnection({
   database : process.env.DATABASE_NAME,
 });
 
+global.schema = global.database.config.database || "no-schema-found";
+
 console.log("DATABASE CONFIGURED?", global.database.config.user != null);
 
 global.database.connect(function(err) {
