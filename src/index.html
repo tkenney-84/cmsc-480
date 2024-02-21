@@ -17,6 +17,42 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <!--  -->
+
+  <script id="azimuth-vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 vPosition;
+    void main() {
+        gl_Position = vPosition;
+    }
+  </script>
+  <script id="azimuth-fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec4 u_FragColor;
+    void main() {
+        gl_FragColor = u_FragColor;
+    }
+  </script>
+
+  <script id="elevation-vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 vPosition;
+    void main() {
+        gl_Position = vPosition;
+    }
+  </script>
+  <script id="elevation-fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec4 u_FragColor;
+    void main() {
+        gl_FragColor = u_FragColor;
+    }
+  </script>
+
+  <script type="text/javascript" src="./assets/webgl/.webgl-resources.js"></script>
+  <script type="text/javascript" src="./assets/webgl/azimuth-diagram.js"></script>
+  <script type="text/javascript" src="./assets/webgl/elevation-diagram.js"></script>
+  <script type="text/javascript" src="./assets/webgl/.initialize-webgl.js"></script>
+
 </head>
 
 <body>
