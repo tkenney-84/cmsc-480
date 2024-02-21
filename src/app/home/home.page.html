@@ -136,7 +136,7 @@
 
   <!-- Put this all into a button grid -->
   <div class="grid grid-cols-6 grid-rows-3" style="padding: 8px; margin: 2px">
-    <button class="btn-home-page-arrow-button"><---</button>
+    <button class="btn-home-page-arrow-button"></button>
   
     <button class="h-4 px-4 m-2 text-sm" style="top: 50%; left: 50%;"></button>
     <button class="btn-home-page-small-button" style="top: 50%; left: 50%;"></button>
@@ -144,13 +144,19 @@
     <button class="btn-home-page-small-button" style="top: 50%; left: 50%;"></button>
 
   
-    <button class="btn-home-page-arrow-button">---></button>
+    <button class="btn-home-page-arrow-button">{{leftArrow}}</button>
   </div>
 
   <br> <br><br>
   <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getSolarPanelPosition()">Get Solar Panel Position <br></button>
   <br>
   <div class = "text-black">Solar Panel Position: {{solarPanelPosition}}</div>
+  <!-- Creating User -->
+  <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "createUser()">Create User</button>
+  <input type="text" [(ngModel)]="createUsername" placeholder="Enter Firstname" class="text-black"/>
+  <input type="text" [(ngModel)]="createPassword" placeholder="Enter Lastname" class="text-black"/>
+  <div class = "text-black">{{successfulCreatedUser}}</div>
+
 
   <!-- This is only for dev purposes -->
   <div>
@@ -159,6 +165,7 @@
     </p>  
  
     <div name = "willDiv" id="willDiv" class ="text-black">Sun Altitude: {{altitude}} Sun Azimuth: {{azimuth}} </div>
+
    
     <input type="text" placeholder="Enter User ID" class = "text-black" [(ngModel)]="id" value ="id"/>
     <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "findUser()">Get User</button>

@@ -4,6 +4,7 @@ var connection = global.database;
 var apis = require('../apiBaseUrl')
 var axios = require('axios')
 var validInput = /^[A-Za-z0-9*&^%$#@!&*+]+$/;
+var invalidText = /[^a-zA-Z]/;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'CMSC480' });
@@ -11,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 //Returns a string to verify that GET requests to the server are working.
 router.get('/testGet', function(req, res, next) {
-  var query = 'SELECT * FROM test_table WHERE id = ?;';
+  var query = 'SELECT * FROM user WHERE id = ?;';
   if (req.query.record == "") {
     res.send(JSON.stringify("No record specified."));
   } else {
@@ -22,7 +23,7 @@ router.get('/testGet', function(req, res, next) {
 });
 
 router.post('/testPost', function(req, res) {
-  var query = 'INSERT INTO test_table (name) VALUES (?);';
+  var query = 'INSERT INTO user (name) VALUES (?);';
   if (!req.body.name) {
     res.send(JSON.stringify("No name specified."));
   } else {
@@ -65,8 +66,8 @@ router.post('/findUser', (req,res)=>{
   }if(userId.match(validInput) == null){
     res.send(JSON.stringify("Invalid Input"))
   }else{
-    var query = `select*from sprint0.user where uid=${userId}`
-    connection.query(query,(err, rows)=>{
+    var query = `select*from user where user_id=${userId}`
+    connection.query(query,(err, rows)=>{``
       if(err)console.log('invalid User')
       if(rows == []){
         res.send(JSON.stringify("User Dose not exist"))
@@ -76,13 +77,32 @@ router.post('/findUser', (req,res)=>{
 
     })
   }
-  
-  
 
 
 })
 router.post('/createUser',(req,res)=>{
+  console.log(req.body)
+  var createUsername = req.body.createUsername;
+  var createPassword = req.body.createPassword; 
+  console.log(createPassword.match(invalidText) != null)
+  if(createUsername == "" || createPassword == ""){
+    res.send(JSON.stringify("no value inserted"))
+  }if(createUsername.match(invalidText) != null || createPassword.match(invalidText) != null){
+    res.send(JSON.stringify("Invalid Input"))
+    console.log("Invalid Username or Password Input (only letters)")
+  }else{
+    var query = `INSERT INTO user (username, password) VALUES ('${createUsername}','${createPassword}');`
+    connection.query(query,(err)=>{``
+      if(err)console.log('invalid User Creation')
+      else{
+        console.log(req.body)
+        res.send({createUsername:createPassword,isSuccessful:true})
+      }
 
+    })
+  }
+
+  // if(firstName)
 })
 router.get('/getPanelPosition',function(req,res){
   var host = apis.solarTracker;
@@ -90,7 +110,9 @@ router.get('/getPanelPosition',function(req,res){
   axios.get(`${host}/get_position?panel=Manually_Controlled`).then((response) =>{
       console.log(response);
 
-  }).catch()
+  }).catch(function(err) {
+    console.error("ERROR", err);
+  })
 
 
 })
