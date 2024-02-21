@@ -1,15 +1,25 @@
 function initAzimuthDiagram() {
 
-  var instance = new WebGLResources("azimuth-canvas");
+  // DON'T MODIFY CODE BELOW THIS POINT
+
+  var globalCanvasID = "azimuth-canvas";
+
+  if (document.getElementById(globalCanvasID) == null) {
+    return null;
+  }
+
+  var instance = new WebGLResources(globalCanvasID);
 
   // Set up the WebGL canvas. If WebGL isn't available, display an error
   // message for the user.
   var gl = instance.WebGLUtils.setupWebGL();
   if (!gl) {
-    instance.showErrorText(
+    console.error("WebGL",
       "WebGL isn't available on your browser or with your current computer."
     );
   }
+
+  // DON'T MODIFY CODE ABOVE THIS POINT
 
   gl.numPoints = 3;
 
@@ -30,8 +40,11 @@ function initAzimuthDiagram() {
   gl.viewport(0, 0, dimensions.width, dimensions.height);
   gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
-  // Initialize the shaders.
+  // Shader customization is available in the root project directory's index.html file.
+  // DON'T MODIFY CODE BELOW THIS POINT
   var program = instance.initShaders(gl, "azimuth-vertex-shader", "azimuth-fragment-shader");
+  // DO NOT MODIFY CODE ABOVE THIS POINT
+
   gl.useProgram(program);
 
   // Set the fragment color with a uniform.

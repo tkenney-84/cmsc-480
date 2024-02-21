@@ -13,7 +13,7 @@ console.log("======== START BACKEND WORK");
 
 console.log("INITIALIZED");
 
-console.log("ENVIRONMENT:", dotenv.parsed || " NO ENVIRONMENT FOUND");
+console.log("ENVIRONMENT CONFIGURED?", dotenv.parsed != {} && dotenv.parsed != null);
 
 /**
  * Get port from environment and store in Express.

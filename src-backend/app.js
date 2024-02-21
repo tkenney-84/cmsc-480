@@ -16,7 +16,7 @@ global.database = mysql.createConnection({
   sslmode  : 'REQUIRED',
 });
 
-console.log("DATABASE", global.database);
+console.log("DATABASE CONFIGURED?", global.database.config.user != null);
 
 global.database.connect(function(err) {
   if (err) {

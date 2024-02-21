@@ -53,10 +53,14 @@ class WebGLResources {
         // Get the canvas from the DOM.
         const canvas = document.getElementById(globalCanvasID);
 
+        if (!canvas) {
+          return null;
+        }
+
         // If the browser does not support WebGL, display an error message and
         // return null.
         if (!window.WebGLRenderingContext) {
-          this.showErrorText(GET_A_WEBGL_BROWSER);
+          console.error("WebGL", GET_A_WEBGL_BROWSER);
           return null;
         }
 
@@ -65,7 +69,7 @@ class WebGLResources {
 
         // If the context was not created, display an error message.
         if (!context) {
-          this.showErrorText(HARDWARE_PROBLEM);
+          console.error("WebGL", HARDWARE_PROBLEM);
         }
 
         // Return the created context. If it was not successfully created, this
@@ -165,52 +169,6 @@ class WebGLResources {
     }) ();
   }
 
-  // The id of the canvas element for every HTML file this script is included in.
-  // If your canvas ID is different, simply change this value to match.
-  // const globalCanvasID = "azimuth-canvas";
-
-  /* ############################################################
-    ###################### ERROR HANDLING ######################
-    ############################################################ */
-
-  /**
-    * Builds the HTML element which displays any error messages.
-    * @param  { string } canvasContainerId id of container of the canvas.
-    * @return { string } The html.
-    */
-  buildErrorHTML(msg) {
-
-    // The button element is placed within an h1 element for the margins.
-    // This decision is purely for aesthetics and can be changed.
-    return (
-      '<h1 class="error-text">Error</h1>' +
-      '<p class="error-text">' +
-      msg +
-      '</p><h1>' +
-      '<button class="reload-button" onclick="reloadPage()">' +
-      'Reload Page' +
-      '</button></h1>'
-    );
-  };
-
-  /**
-    * Adds an error message to the parent container of the canvas.
-    * @param { string } msg. The error message to display.
-    */
-  showErrorText(msg) {
-
-    // Get the canvas from the DOM.
-    const canvas = document.getElementById(this.globalCanvasID);
-
-    // Get the parent container of the canvas.
-    var parentContainer = canvas.parentNode;
-
-    // If the parent container exists, add the error message to it.
-    if (parentContainer) {
-      parentContainer.innerHTML = this.buildErrorHTML(msg);
-    }
-  }
-
   /* ###########################################################
     ################## SHADER INITIALIZATION ##################
     ########################################################### */
@@ -235,7 +193,7 @@ class WebGLResources {
     // If the vertex shader does not exist, display an error message and return
     // null.
     if (!vertexElement) {
-      this.showErrorText("Unable to load vertex shader " + vertexShaderId + ".");
+      console.error("WebGL", "Unable to load vertex shader " + vertexShaderId + ".");
       return null;
 
     // If the vertex shader does exist, create a vertex shader and compile it.
@@ -259,7 +217,7 @@ class WebGLResources {
           "<pre>" +
           gl.getShaderInfoLog(vertexShader) +
           "</pre>";
-          this.showErrorText(msg);
+          console.error("WebGL", msg);
         return null;
       }
     }
@@ -272,7 +230,7 @@ class WebGLResources {
     // If the fragment shader does not exist, display an error message and return
     // null.
     if (!fragElem) {
-      this.showErrorText("Unable to load vertex shader " + fragmentShaderId + ".");
+      console.error("WebGL", "Unable to load vertex shader " + fragmentShaderId + ".");
       return null;
 
     // If the fragment shader does exist, create a fragment shader and compile it.
@@ -296,7 +254,7 @@ class WebGLResources {
           "<pre>" +
           gl.getShaderInfoLog(fragmentShader) +
           "</pre>";
-          this.showErrorText(msg);
+          console.error("WebGL", msg);
         return null;
       }
     }
@@ -320,7 +278,7 @@ class WebGLResources {
         "<pre>" +
         gl.getProgramInfoLog(program) +
         "</pre>";
-        this.showErrorText(msg);
+        console.error("WebGL", msg);
       return null;
     }
 
