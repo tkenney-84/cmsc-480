@@ -11,11 +11,13 @@
     "test": "ng test",
     "lint": "ng lint",
 
-    "local": "concurrently \"ionic serve --configuration=development\" \"node ./src-backend/bin/www\"",
+    "front": "ionic serve --configuration=development",
+    "back": "node ./src-backend/bin/www",
+    "local": "concurrently \"npm run front\" \"npm run back\"",
     "build:local": "ionic build --configuration=development",
     "build:prepro": "ionic build --configuration=preproduction",
     "build:prod": "ionic build --configuration=production",
-    "backend": "node ./src-backend/bin/www"
+    "sync": "npm install && cd src-backend && npm install && cd .."
   },
   "private": true,
   "dependencies": {
@@ -44,7 +46,10 @@
     "morgan": "~1.9.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.2"
+    "zone.js": "~0.14.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.2",
+    "mysql2": "^3.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.0",

@@ -19,7 +19,10 @@ global.database = mysql.createConnection({
 console.log("DATABASE", global.database);
 
 global.database.connect(function(err) {
-  console.error('Error connecting to MySQL:', err);
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+    process.exit();
+  }
 });
 
 var cors = require('cors');

@@ -4,12 +4,16 @@
  * Module dependencies.
  */
 
-var dotenv = require('dotenv').config({path:'../.env'});
+var dotenv = require('dotenv').config();
 var app = require('../app');
 var debug = require('debug')('src-backend:server');
 var http = require('http');
 
-console.log("INITIALIZED", dotenv);
+console.log("======== START BACKEND WORK");
+
+console.log("INITIALIZED");
+
+console.log("ENVIRONMENT:", dotenv.parsed || " NO ENVIRONMENT FOUND");
 
 /**
  * Get port from environment and store in Express.
@@ -27,6 +31,8 @@ console.log("PORT", port);
 var server = http.createServer(app);
 
 console.log("SERVER CREATED");
+
+console.log("======== END BACKEND WORK");
 
 /**
  * Listen on provided port, on all network interfaces.
