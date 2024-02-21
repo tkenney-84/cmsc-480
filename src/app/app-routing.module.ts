@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Page404Page } from './page404/page404.page';
 
 const routes: Routes = [
   {
@@ -27,7 +28,13 @@ const routes: Routes = [
     path: 'move-solar-panel',
     loadChildren: () => import('./move-solar-panel/move-solar-panel.module').then( m => m.MoveSolarPanelPageModule)
   },
+  {
+    path: 'page404',
+    loadChildren: () => import('./page404/page404.module').then( m => m.Page404PageModule)
+  },
 
+  // The wildcard route MUST be at the end 
+  { path: '**', component: Page404Page }
 ];
 
 @NgModule({
