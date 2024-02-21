@@ -17,7 +17,7 @@
     "build:local": "ionic build --configuration=development",
     "build:prepro": "ionic build --configuration=preproduction",
     "build:prod": "ionic build --configuration=production",
-    "sync": "npm install && cd src-backend && npm install && cd .."
+    "sync": "npm install ionic -g --force && npm install --force && cd src-backend && npm install --force && cd .."
   },
   "private": true,
   "dependencies": {
