@@ -67,8 +67,6 @@ export class HomePage implements OnInit {
       isSuccessful:this.successfulCreatedUser
     }).then((response) =>{
       console.log(response.data);
-      this.firstName = response.data.rows[0].createUsername;
-      this.lastName  = response.data.rows[0].createPassword;
       this.successfulCreatedUser = response.data.isSuccessful;
     })
   }

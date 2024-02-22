@@ -90,15 +90,19 @@ router.post('/createUser',(req,res)=>{
   }if(createUsername.match(invalidText) != null || createPassword.match(invalidText) != null){
     res.send(JSON.stringify("Invalid Input"))
     console.log("Invalid Username or Password Input (only letters)")
-  }else{
+   }
+  else{
     var query = `INSERT INTO user (username, password) VALUES ('${createUsername}','${createPassword}');`
-    connection.query(query,(err)=>{``
-      if(err)console.log('invalid User Creation')
-      else{
-        console.log(req.body)
-        res.send({createUsername:createPassword,isSuccessful:true})
-      }
+    connection.query(query,(err,rows)=>{``
+      if(err){
 
+        res.send({isSuccessful:false})
+      }
+      else{
+
+        res.send({createUsername:createUsername,createPassword:createPassword,isSuccessful:true})
+      }
+    
     })
   }
 
