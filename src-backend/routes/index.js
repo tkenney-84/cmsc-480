@@ -36,7 +36,7 @@ router.post('/testPost', function(req, res) {
 router.get('/sendRandomNumbers',function(req,res){
       var result = [];
       for(let i = 0; i < 2; i++){
-        result.push(Math.floor(Math.random() * (100 - 1) + 1));
+        result.push(Math.floor(Math.random() * (180 - 1) + 1));
       }
       result.sort(function(a,b){return a- b});
       console.log(result);
