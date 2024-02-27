@@ -8,35 +8,38 @@
     </ion-toolbar>
   </ion-header>
 
-  <h1>We can not find the page you are looking for</h1>
-
-
-  <div class = "holder">
-
-    <div class = "moon"></div>
-    <div class = "star-1"></div>
-    <div class = "star-2"></div>
-
+  <div class = "topnav">
+    <a class = "active" href ="#home">Home</a>
+    <a href = "move-solar-panel.page.html">Move Solar Panel</a>
+    <a href = "view-graph.page.html">View Graph</a>
+    <a href = "">About</a>
+    <a href = "">Contact</a>
+    <a href = "">Sign In / Logout</a>
   </div>
 
-  <!--
-    TODO:
-     Make the sky into gradient
-     Center everything
-     Add text to the page
+  <p style = "color:white; font-size:72px; margin:auto; width:50%; text-align:center; margin-bottom:10%">We can not find the page you are looking for</p>
 
-  -->
- 
-  
+  <div class = "holder">
+    <div class = "moon"></div>
+    <div style = "color:white; text-align:center; font-size:62px; padding-top:2%; color:yellow;">Error: 404 </div>
+    <div class = "star-1"></div>
+    <div class = "star-2"></div>
+  </div>
+
+  <div style="color:white; font-size: 32px; text-align:center; position:fixed; bottom:5%; width:100%;">Can't use the solar panels during night. Go back to the <a href="/home.page.html">HOME</a> page to start exploring again.</div>
+
   <style> 
     .holder {
-      background-color: blue;
+      background: rgb(172,181,186);
+      background: linear-gradient(34deg, rgba(172,181,186,1) 1%, rgba(35,128,172,1) 25%, rgba(41,89,110,1) 61%, rgba(0,0,0,1) 96%);
       width: 50%;
       height: 50%;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      border:white;
+      border-style:solid;
     }
     
     h1 {
@@ -57,25 +60,17 @@
       transform: translate(-50%, -50%);
     }
     
-    .star-1 {
-      position: absolute;
-      top: calc(50% - 400px); /* Adjust distance from moon */
-      left: calc(50% - 150px); /* Adjust distance from moon */
-    }
-    
     .star-2 {
       position: absolute;
       top: calc(50% + 100px); /* Adjust distance from moon */
       left: calc(50% - 70px); /* Adjust distance from moon */
     }
     
-    
-
     .star-1{
       position: relative;
       background-color: #FFFDFD;
-      top: 50px;
-      left: -10px;
+      top: calc(50% - 400px);
+      left: calc(50% - 70px);
       width: 5px;
       height: 5px;
       border-radius: 50%;
@@ -92,8 +87,8 @@
     .star-2{
       position: absolute;
       background-color: #FFFF00;
-      top: 100px;
-      left: -60px;
+      top: clac(50% - 100px);
+      left: calc(50% - 70px);
       width:5px;
       height:5px;
       border-radius: 50%;
@@ -106,6 +101,31 @@
       animation: pulsate 7s ease;
       animation-iteration-count: infinite;   
     }
+
+      .topnav{
+        overflow:hidden;
+        background-color: #6F263D;
+        height: 4%;
+      }
+    
+      .topnav a{
+        float: center;
+        color: #F3CF3E;
+        text-align: left;
+        padding-left: 3%;
+        padding-top: 30%;
+        margin-top:4%;
+    
+      
+    
+        font-size: 17px;
+      }
+    
+      .topnav a.active {
+        background-color: #04A6D;
+        color: white;
+      }
+   
 
   </style>
 
