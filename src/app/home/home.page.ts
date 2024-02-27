@@ -21,10 +21,15 @@ export class HomePage implements OnInit {
   lastName:string = "";
   id:number= 0;
   solarPanelPosition:string = ""
+  leftArrow:string="<---"
+  rightArrow:string="--->"
+  createUsername:string=""
+  createPassword:string=""
+  successfulCreatedUser:boolean=false
   getRandomNumbers(){
     axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
       let arr = response.data.randomNumbers;
-     
+      
       this.randomNumbers = arr;
     })
   }
@@ -53,6 +58,16 @@ export class HomePage implements OnInit {
       console.log(response.data);
         this.firstName = response.data.rows[0].username;
         this.lastName  = response.data.rows[0].password;
+    })
+  }
+  createUser(){
+    axios.post(`${this.baseURL}/createUser`,{
+      createUsername:this.createUsername,
+      createPassword:this.createPassword,
+      isSuccessful:this.successfulCreatedUser
+    }).then((response) =>{
+      console.log(response.data);
+      this.successfulCreatedUser = response.data.isSuccessful;
     })
   }
   getSolarPanelPosition(){

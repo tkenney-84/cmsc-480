@@ -1,3 +1,20 @@
+const { default: axios } = require("axios");
+
+//sun direction information
+
+//in form RGBa
+var sunPoints = [];
+var sunColor=[1.0,0.0,0.0,1.0];
+var sunAngle;
+
+//solar panel information
+var solarPoints= [];
+var solarColor=[0.0, 0.0, 1.0, 1.0];
+var solarAngle;
+
+//both
+var lineRadius=.75;
+
 function initAzimuthDiagram() {
 
   // DON'T MODIFY CODE BELOW THIS POINT
@@ -19,21 +36,36 @@ function initAzimuthDiagram() {
     );
   }
 
-  // DON'T MODIFY CODE ABOVE THIS POINT
+  //get values (random at the moment)
+   axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
+    sunPoints = response.data.randomNumbers;
+   });
+   axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
+    solarPoints = response.data.randomNumbers;
+   });
 
-  gl.numPoints = 3;
+   //center
+   sunPoints.push(0,0);
+   solarPoints.push(0,0);
 
-  // An array of points to be rendered on the canvas.
-  var points = [];
+   //convert degrees to radians then to cordinates
+   sunPoints[0]=lineRadius*Math.cos(sunPoints[0]*Math.PI/180);
+   sunPoints[1]=lineRadius*Math.sin(sunPoints[1]*Math.PI/180);
+   solarPoints[0]=lineRadius*Math.cos(solarPoints[0]*Math.PI/180);
+   solarPoints[1]=lineRadius*Math.sin(solarPoints[1]*Math.PI/180);
 
-  // Fill the points array with coordinates.
-  for (var i = 0; i < gl.numPoints; i++) {
-    var coordinate = instance.random2DCoordinate();
-    points.push(coordinate.x, coordinate.y);
-  }
+   //merge sun points and solar points for vertex buffer
+   for(var i=0; i<4; i++){
+    sunPoints[i+4]=solarPoints[i];
+    console.log(sunPoints[i]);
+   }
 
-  // Convert the points array to a Float32Array.
-  var finalArray = new Float32Array(points);
+   //merge color buffer 
+   //future update
+
+   // Convert the points array to a Float32Array.
+
+  var finalArray = new Float32Array(sunPoints);
 
   // Set up the canvas.
   var dimensions = instance.canvasDimensions();
@@ -70,5 +102,7 @@ function render(gl) {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Draw the points.
-  gl.drawArrays(gl.TRIANGLES, 0, gl.numPoints);
+  gl.drawArrays(gl.LINES, 0, 2);
+  gl.drawArrays(gl.LINES, 4, 2);
 }
+
