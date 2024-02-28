@@ -18,12 +18,15 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   <!--  -->
 
   <script id="azimuth-vertex-shader" type="x-shader/x-vertex">
     attribute vec4 vPosition;
     void main() {
         gl_Position = vPosition;
+        gl_PointSize = 5.0;
     }
   </script>
   <script id="azimuth-fragment-shader" type="x-shader/x-fragment">

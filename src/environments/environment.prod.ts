@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: 'http://:2443'
+  apiURL: 'https://solar.mads.commonwealthu.edu:2443'
 };

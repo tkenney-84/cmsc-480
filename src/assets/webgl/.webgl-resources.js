@@ -446,4 +446,14 @@ class WebGLResources {
       y: this.randomSignMultiplier() * this.randomNumber(),
     };
   }
+
+  getAPIUrl() {
+    if (window.location.hostname == "localhost") {
+      return "http://localhost:2024";
+    } else if (window.location.hostname == "test.kenneydiaz.net") {
+      return "https://test.kenneydiaz.net:2443";
+    } else {
+      return "https://solar.mads.commonwealthu.edu:2443";
+    }
+  }
 }

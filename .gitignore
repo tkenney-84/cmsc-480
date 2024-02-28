@@ -18,6 +18,8 @@ log.txt
 /.versions
 /coverage
 
+./cmsc-480/
+
 # Ionic
 /.ionic
 /www

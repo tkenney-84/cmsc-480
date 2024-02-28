@@ -1,21 +1,19 @@
-const { default: axios } = require("axios");
-
-//sun direction information
-
-//in form RGBa
-var sunPoints = [];
-var sunColor=[1.0,0.0,0.0,1.0];
-var sunAngle;
-
-//solar panel information
-var solarPoints= [];
-var solarColor=[0.0, 0.0, 1.0, 1.0];
-var solarAngle;
-
-//both
-var lineRadius=.75;
-
 function initAzimuthDiagram() {
+
+  //sun direction information
+
+  //in form RGBa
+  var sunPoints = [];
+  var sunColor=[1.0,0.0,0.0,1.0];
+  var sunAngle;
+
+  //solar panel information
+  var solarPoints= [];
+  var solarColor=[0.0, 0.0, 1.0, 1.0];
+  var solarAngle;
+
+  //both
+  var lineRadius=.75;
 
   // DON'T MODIFY CODE BELOW THIS POINT
 
@@ -27,6 +25,8 @@ function initAzimuthDiagram() {
 
   var instance = new WebGLResources(globalCanvasID);
 
+  var apiURL = instance.getAPIUrl();
+
   // Set up the WebGL canvas. If WebGL isn't available, display an error
   // message for the user.
   var gl = instance.WebGLUtils.setupWebGL();
@@ -37,10 +37,10 @@ function initAzimuthDiagram() {
   }
 
   //get values (random at the moment)
-   axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
+   axios.get(`${apiURL}/sendRandomNumbers`).then((response)=>{
     sunPoints = response.data.randomNumbers;
    });
-   axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
+   axios.get(`${apiURL}/sendRandomNumbers`).then((response)=>{
     solarPoints = response.data.randomNumbers;
    });
 
@@ -55,12 +55,14 @@ function initAzimuthDiagram() {
    solarPoints[1]=lineRadius*Math.sin(solarPoints[1]*Math.PI/180);
 
    //merge sun points and solar points for vertex buffer
-   for(var i=0; i<4; i++){
-    sunPoints[i+4]=solarPoints[i];
-    console.log(sunPoints[i]);
-   }
+  //  for(var i=0; i<4; i++){
+  //   sunPoints[i+4]=solarPoints[i];
+  //   console.log(sunPoints[i]);
+  //  }
 
-   //merge color buffer 
+  sunPoints.concat(solarPoints);
+
+   //merge color buffer
    //future update
 
    // Convert the points array to a Float32Array.
@@ -102,7 +104,7 @@ function render(gl) {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Draw the points.
-  gl.drawArrays(gl.LINES, 0, 2);
-  gl.drawArrays(gl.LINES, 4, 2);
+  gl.drawArrays(gl.LINES, 0, preFinalArray.size());
+  // gl.drawArrays(gl.LINES, 4, 2);
 }
 
