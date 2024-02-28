@@ -5,13 +5,13 @@ After=network.target
 [Service]
 User=root
 Environment="PORT=2024"
-Environment="ALLOWED_ORIGIN=https://sample.net"
-Environment="DATABASE_HOST=hostname"
-Environment="DATABASE_PORT=port"
-Environment="DATABASE_NAME=dbname"
-Environment="DATABASE_USER=dbuser"
-Environment="DATABASE_PASSWORD=password"
-WorkingDirectory=/back/end/root/directory
+Environment="ALLOWED_ORIGIN=https://solar.mads.commonwealthu.edu"
+Environment="DATABASE_HOST="
+Environment="DATABASE_PORT="
+Environment="DATABASE_NAME="
+Environment="DATABASE_USER="
+Environment="DATABASE_PASSWORD="
+WorkingDirectory=./web/back-end/
 ExecStart=/bin/sh -c 'node ./bin/www'
 Restart=on-failure
 
