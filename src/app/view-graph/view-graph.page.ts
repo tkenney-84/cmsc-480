@@ -9,7 +9,6 @@ export class ViewGraphPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

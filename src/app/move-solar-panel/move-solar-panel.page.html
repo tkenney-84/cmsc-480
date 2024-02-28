@@ -1,7 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>moveSolarPanel</ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -11,11 +9,102 @@
     </ion-toolbar>
   </ion-header>
 
-  <div style = "color:black; font-size:42px;">
+  <div class = "topnav">
+    <a class = "active" href ="#home">Home</a>
+    <a href = "move-solar-panel.page.html">Move Solar Panel</a>
+    <a href = "view-graph.page.html">View Graph</a>
+    <a href = "">About</a>
+    <a href = "">Contact</a>
+    <a href = "">Sign In / Logout</a>
+  </div>
+
+  <div style = "color:black; padding-top:3%; font-size:42px;" class= "flex justify-center items-center" >
     Move solar pannel
   </div>
 
-  <canvas id="azimuth-canvas" width="300" height="300"></canvas>
-  <canvas id="elevation-canvas" width="300" height="300"></canvas>
+  <div class = "container">
+
+  <p>Azimuth Canvas<p>
+  <p>Elevation Canvas</p>
+
+  </div>
+
+  <ion-grid class>
+    <ion-row >
+      <ion-col class= "flex justify-center items-center"> <div style = "color:black;">Azimuth Canvas </div> </ion-col>
+      <ion-col class= "flex justify-center items-center"> <div style = "color:black;">Elevation Canvas</div> </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class= "flex justify-center items-center">   
+         <canvas id="azimuth-canvas" width="300" height="300"></canvas> 
+      </ion-col>
+      <ion-col class= "flex justify-center items-center">  
+        <canvas id="elevation-canvas" width="300" height="300"></canvas> 
+      </ion-col>
+    </ion-row>
+
+    <ion-row >
+      <ion-col class = "flex justify-center items-center"> 
+        <ion-button >up</ion-button>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col class = "flex justify-center items-center">
+        <ion-button>left </ion-button>
+        <ion-button>right </ion-button>
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+
+      <ion-col class = "flex justify-center items-center">
+        <ion-button>down</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <style>
+    .topnav{
+      overflow:hidden;
+      background-color: #6F263D;
+      height: 4%;
+    }
+  
+    .topnav a{
+      float: center;
+      color: #F3CF3E;
+      text-align: left;
+      padding-left: 3%;
+      padding-top: 30%;
+      margin-top:4%;
+      font-size: 17px;
+    }
+  
+    .topnav a.active {
+      background-color: #04A6D;
+      color: white;
+    }
+
+
+    #azimuth-canvas{
+      border:black;
+      border-style:solid;
+ 
+    }
+
+    #elevation-canvas{
+      border:black;
+      border-style:solid;
+
+    }
+
+  
+
+  </style>
 
 </ion-content>
