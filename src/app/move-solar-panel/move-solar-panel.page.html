@@ -2,7 +2,7 @@
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" style ="display: flex; flex-direction:column;">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">moveSolarPanel</ion-title>
@@ -22,14 +22,8 @@
     Move solar pannel
   </div>
 
-  <div class = "container">
 
-  <p>Azimuth Canvas<p>
-  <p>Elevation Canvas</p>
-
-  </div>
-
-  <ion-grid class>
+  <ion-grid>
     <ion-row >
       <ion-col class= "flex justify-center items-center"> <div style = "color:black;">Azimuth Canvas </div> </ion-col>
       <ion-col class= "flex justify-center items-center"> <div style = "color:black;">Elevation Canvas</div> </ion-col>
@@ -46,29 +40,68 @@
 
     <ion-row >
       <ion-col class = "flex justify-center items-center"> 
-        <ion-button >up</ion-button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;">Up</button>
       </ion-col>
-
     </ion-row>
 
     <ion-row>
 
       <ion-col class = "flex justify-center items-center">
-        <ion-button>left </ion-button>
-        <ion-button>right </ion-button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E; margin-right:1%;">Left </button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;">Reset</button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E; margin-left:1%;">Right </button>
       </ion-col>
 
     </ion-row>
     <ion-row>
 
       <ion-col class = "flex justify-center items-center">
-        <ion-button>down</ion-button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;">down</button>
       </ion-col>
     </ion-row>
 
   </ion-grid>
 
+  <footer style = "margin-top: auto; text-align: center; color: red; background: #6F263D; height: 9%; color:#F3CF3E; margin-top:2%; padding-top:1%;">
+
+    <div class = "social-media">
+      <div class = "grid-item"> <a href = "https://www.facebook.com"> Facebook </a> </div>
+      <div class = "grid-item">Instgram </div>
+      <div class = "grid-item">Twitter </div>
+      <div class = "grid-item">LinkedIn </div>
+    </div>
+    <br>
+
+    <div class = "grid-container">
+      <div class = "grid-item">Contact Us </div>
+      <div class = "grid-item">About Us </div>
+      <div class = "grid-item">The story </div>
+      <div class = "grid-item">The History </div>
+      <div class = "grid-item">Status </div>
+      <div class = "grid-item">News </div>      
+    </div>
+  </footer>
+
   <style>
+
+    .social-media{
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      grid-gap:2px;
+    }
+
+    .grid-container{
+      display: grid;
+      grid-template-columns: auto auto;
+    }
+    .grid-item{
+      background-color: #6F263D;
+      padding: 2px;
+      text-align: center;
+    }
+    
+
+
     .topnav{
       overflow:hidden;
       background-color: #6F263D;
@@ -90,21 +123,15 @@
       color: white;
     }
 
-
     #azimuth-canvas{
       border:black;
       border-style:solid;
- 
     }
 
     #elevation-canvas{
       border:black;
       border-style:solid;
-
     }
 
-  
-
   </style>
-
 </ion-content>
