@@ -117,7 +117,14 @@ router.get('/getPanelPosition',function(req,res){
   }).catch(function(err) {
     console.error("ERROR", err);
   })
-
+})
+router.get('/getAzimuthAngle',function(req,res){
+    var angle = Math.floor(Math.random() * 366);
+    res.send({angle:angle});
+})
+router.get('/getElevationAngle',function(req,res){
+    var angle = Math.floor(Math.random() * 91);
+    res.send({angle:angle});
 
 })
 

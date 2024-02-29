@@ -1,3 +1,5 @@
+const { default: axios } = require("axios");
+
 function initElevationDiagram() {
 
   // DON'T MODIFY CODE BELOW THIS POINT
@@ -20,7 +22,18 @@ function initElevationDiagram() {
   }
 
   // DON'T MODIFY CODE ABOVE THIS POINT
+  var angle;
+  var globalCanvasID = "azimuth-canvas";
 
+  if (document.getElementById(globalCanvasID) == null) {
+    return null;
+  }
+
+  var instance = new WebGLResources(globalCanvasID);
+   var apiURL = instance.getAPIUrl();
+  axios.get(`${apiURL}/getElevation`,function(req,res){
+     angle = req.data.angle
+  })
   gl.numPoints = 3;
 
   // An array of points to be rendered on the canvas.

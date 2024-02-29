@@ -1,3 +1,5 @@
+const { default: axios } = require("axios");
+
 function initAzimuthDiagram() {
 
   //sun direction information
@@ -26,7 +28,7 @@ function initAzimuthDiagram() {
   var instance = new WebGLResources(globalCanvasID);
 
   var apiURL = instance.getAPIUrl();
-
+  var azimuthAngle;
   // Set up the WebGL canvas. If WebGL isn't available, display an error
   // message for the user.
   var gl = instance.WebGLUtils.setupWebGL();
@@ -43,6 +45,9 @@ function initAzimuthDiagram() {
    axios.get(`${apiURL}/sendRandomNumbers`).then((response)=>{
     solarPoints = response.data.randomNumbers;
    });
+   axios.get(`${apiURL}/getAzimuthAngle`).then((response)=>{
+      azimuthAngle = response.data.angle;
+   })
 
    //center
    sunPoints.push(0,0);
