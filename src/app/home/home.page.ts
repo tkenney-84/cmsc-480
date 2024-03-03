@@ -27,22 +27,22 @@ export class HomePage implements OnInit {
   createPassword:string=""
   successfulCreatedUser:boolean=false
   getRandomNumbers(){
-    axios.get(`${this.baseURL}/sendRandomNumbers`).then((response)=>{
+    axios.get(`api/sendRandomNumbers`).then((response)=>{
       let arr = response.data.randomNumbers;
-      
+
       this.randomNumbers = arr;
     })
   }
 
 
   toGraph(){
-    
+
   }
 
   sendLatLong(){
 
 
-    axios.post(`${this.baseURL}/solarCoordinates`,{
+    axios.post(`api/solarCoordinates`,{
       lat:this.lat,
       long:this.long
     }).then((response) =>{
@@ -52,7 +52,7 @@ export class HomePage implements OnInit {
     })
   }
   findUser(){
-    axios.post(`${this.baseURL}/findUser`,{
+    axios.post(`api/findUser`,{
       userId:this.id
     }).then((response) =>{
       console.log(response.data);
@@ -61,7 +61,7 @@ export class HomePage implements OnInit {
     })
   }
   createUser(){
-    axios.post(`${this.baseURL}/createUser`,{
+    axios.post(`api/createUser`,{
       createUsername:this.createUsername,
       createPassword:this.createPassword,
       isSuccessful:this.successfulCreatedUser
@@ -71,15 +71,17 @@ export class HomePage implements OnInit {
     })
   }
   getSolarPanelPosition(){
-      axios.get(`${this.baseURL}/getPanelPosition`).then((response) =>{
+      axios.get(`api/getPanelPosition`).then((response) =>{
           console.log(response);
       }).catch((err) =>{
         console.log(err);
       });
-      
+
 
   }
+
   ngOnInit() {
+    return; // This'll shut the linter up.
   }
 
 }

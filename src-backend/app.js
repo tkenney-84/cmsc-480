@@ -14,7 +14,7 @@ global.database = mysql.createConnection({
   password : process.env.DATABASE_PASSWORD,
   database : process.env.DATABASE_NAME,
   multipleStatements: false,
-  sslmode  : 'REQUIRED'
+  // sslmode  : 'REQUIRED' // DO NOT RE ENABLE THIS!
 });
 
 global.schema = global.database.config.database || "no-schema-found";
