@@ -1,6 +1,7 @@
-const { default: axios } = require("axios");
-
 function initElevationDiagram() {
+
+  var lineLength = 0.85;
+  var linePoints = [0, 0];
 
   // DON'T MODIFY CODE BELOW THIS POINT
 
@@ -12,6 +13,8 @@ function initElevationDiagram() {
 
   var instance = new WebGLResources(globalCanvasID);
 
+  var apiURL = instance.getAPIUrl();
+
   // Set up the WebGL canvas. If WebGL isn't available, display an error
   // message for the user.
   var gl = instance.WebGLUtils.setupWebGL();
@@ -20,68 +23,48 @@ function initElevationDiagram() {
       "WebGL isn't available on your browser or with your current computer."
     );
   }
-
-  // DON'T MODIFY CODE ABOVE THIS POINT
-  var angle;
-  var globalCanvasID = "azimuth-canvas";
-
-  if (document.getElementById(globalCanvasID) == null) {
-    return null;
-  }
-
-  var instance = new WebGLResources(globalCanvasID);
-   var apiURL = instance.getAPIUrl();
-  axios.get(`${apiURL}/getElevation`,function(req,res){
-     angle = req.data.angle
-  })
-  gl.numPoints = 3;
-
-  // An array of points to be rendered on the canvas.
-  var points = [];
-
-  // Fill the points array with coordinates.
-  for (var i = 0; i < gl.numPoints; i++) {
-    var coordinate = instance.random2DCoordinate();
-    points.push(coordinate.x, coordinate.y);
-  }
-
-  // Convert the points array to a Float32Array.
-  var finalArray = new Float32Array(points);
-
-  // Set up the canvas.
-  var dimensions = instance.canvasDimensions();
-  gl.viewport(0, 0, dimensions.width, dimensions.height);
-  gl.clearColor(1.0, 1.0, 1.0, 1.0);
-
-  // Shader customization is available in the root project directory's index.html file.
-  // DON'T MODIFY CODE BELOW THIS POINT
-  var program = instance.initShaders(gl, "elevation-vertex-shader", "elevation-fragment-shader");
   // DO NOT MODIFY CODE ABOVE THIS POINT
 
-  gl.useProgram(program);
+  //get values (random at the moment)
+  axios.get(`${apiURL}/getElevationAngle`).then((response)=>{
 
-  // Set the fragment color with a uniform.
-  var u_FragColor = gl.getUniformLocation(program, 'u_FragColor');
-  gl.uniform4f(u_FragColor, 1.0, 0.0, 0.0, 1.0);
+    var lineAngle = response.data.angle;
 
-  // Load the data into the GPU.
-  var bufferId = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
-  gl.bufferData(gl.ARRAY_BUFFER, finalArray, gl.STATIC_DRAW);
+    var lineX = lineLength * Math.cos(lineAngle * (Math.PI / 180));
+    var lineY = lineLength * Math.sin(lineAngle * (Math.PI / 180));
 
-  // Associate the shader variables with the buffer data.
-  var vPosition = gl.getAttribLocation(program, "vPosition");
-  gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
-  gl.enableVertexAttribArray(vPosition);
+    linePoints.push(lineX, lineY);
 
-  render(gl);
+    // Convert the points array to a Float32Array.
+    var finalArray = new Float32Array(linePoints);
+
+    // Set up the canvas.
+    var dimensions = instance.canvasDimensions();
+    gl.viewport(0, 0, dimensions.width, dimensions.height);
+    gl.clearColor(1.0, 1.0, 1.0, 1.0);
+
+    // Shader customization is available in the root project directory's index.html file.
+    // DON'T MODIFY CODE BELOW THIS POINT
+    var program = instance.initShaders(gl, "elevation-vertex-shader", "elevation-fragment-shader");
+    gl.useProgram(program);
+    // DO NOT MODIFY CODE ABOVE THIS POINT
+
+
+    // Set the fragment color with a uniform.
+    var u_FragColor = gl.getUniformLocation(program, 'u_FragColor');
+    gl.uniform4f(u_FragColor, 1.0, 0.0, 0.0, 1.0);
+
+    // Load the data into the GPU.
+    var bufferId = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
+    gl.bufferData(gl.ARRAY_BUFFER, finalArray, gl.STATIC_DRAW);
+
+    // Associate the shader variables with the buffer data.
+    var vPosition = gl.getAttribLocation(program, "vPosition");
+    gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(vPosition);
+
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.LINES, 0, 2);
+  });
 };
-
-function render(gl) {
-
-  // Clear the canvas.
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
-  // Draw the points.
-  gl.drawArrays(gl.TRIANGLES, 0, gl.numPoints);
-}

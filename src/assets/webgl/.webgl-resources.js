@@ -449,7 +449,7 @@ class WebGLResources {
 
   getAPIUrl() {
     if (window.location.hostname == "localhost") {
-      return "http://localhost:2024/";
+      return "http://localhost:2024";
     } else if (window.location.hostname == "test.kenneydiaz.net") {
       return "https://test.kenneydiaz.net/api";
     } else {
