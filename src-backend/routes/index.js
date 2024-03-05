@@ -5,33 +5,7 @@ var apis = require('../apiBaseUrl')
 var axios = require('axios')
 var validInput = /^[A-Za-z0-9*&^%$#@!&*+]+$/;
 var invalidText = /[^a-zA-Z]/;
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'CMSC480' });
-});
 
-//Returns a string to verify that GET requests to the server are working.
-router.get('/testGet', function(req, res, next) {
-  var query = 'SELECT * FROM user WHERE id = ?;';
-  if (req.query.record == "") {
-    res.send(JSON.stringify("No record specified."));
-  } else {
-    connection.query(query, [req.query.record], function(err, results) {
-      res.send(JSON.stringify(results[0].name));
-    });
-  }
-});
-
-router.post('/testPost', function(req, res) {
-  var query = 'INSERT INTO user (name) VALUES (?);';
-  if (!req.body.name) {
-    res.send(JSON.stringify("No name specified."));
-  } else {
-    connection.query(query, [req.body.name], function(err, rows, fields) {
-      res.send(JSON.stringify(rows.insertId));
-    });
-  }
-});
 //sends an array of random numbers to test get request to the front end.
 router.get('/sendRandomNumbers',function(req,res){
       var result = [];
@@ -42,22 +16,24 @@ router.get('/sendRandomNumbers',function(req,res){
       console.log(result);
       res.send({randomNumbers:result});
 
-})
+});
+
 router.post('/solarCoordinates', function(req,res){
   console.log(req.body)
   if(req.body.lat == '' || req.body.long == ''){
     res.send(JSON.stringify("No altitude or longitude specified"))
   }else{
-    //eventually Store this in the data base 
+    //eventually Store this in the data base
     var key =apis.solarPositionKey;
-    var apiEndpoint =`${apis.solarPosition}apiKey=${key}&lat=${req.body.lat}&long=${req.body.long}`; 
+    var apiEndpoint =`${apis.solarPosition}apiKey=${key}&lat=${req.body.lat}&long=${req.body.long}`;
 
      axios.get(apiEndpoint).then((response)=>{
-       
+
         res.send({sunAltitude:response.data.sun_altitude,sunAzimuth:response.data.sun_azimuth});
-    })  
+    })
   }
-})
+});
+
 router.post('/findUser', (req,res)=>{
   var userId = req.body.userId;
   //console.log(userId)
@@ -77,13 +53,12 @@ router.post('/findUser', (req,res)=>{
 
     })
   }
+});
 
-
-})
 router.post('/createUser',(req,res)=>{
   console.log(req.body)
   var createUsername = req.body.createUsername;
-  var createPassword = req.body.createPassword; 
+  var createPassword = req.body.createPassword;
   console.log(createPassword.match(invalidText) != null)
   if(createUsername == "" || createPassword == ""){
     res.send(JSON.stringify("no value inserted"))
@@ -102,12 +77,13 @@ router.post('/createUser',(req,res)=>{
 
         res.send({createUsername:createUsername,createPassword:createPassword,isSuccessful:true})
       }
-    
+
     })
   }
 
   // if(firstName)
-})
+});
+
 router.get('/getPanelPosition',function(req,res){
   var host = apis.solarTracker;
   console.log(`${host}/get_position?panel=Manually_Controlled`)
@@ -117,16 +93,16 @@ router.get('/getPanelPosition',function(req,res){
   }).catch(function(err) {
     console.error("ERROR", err);
   })
-})
+});
+
 router.get('/getAzimuthAngle',function(req,res){
     var angle = Math.floor(Math.random() * 360);
     res.send({angle:angle});
-})
+});
+
 router.get('/getElevationAngle',function(req,res){
     var angle = Math.floor(Math.random() * 90);
     res.send({angle:angle});
-
-})
-
+});
 
 module.exports = router;

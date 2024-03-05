@@ -4,16 +4,7 @@ import { Page404Page } from './page404/page404.page';
 
 const routes: Routes = [
   {
-    path: 'home2',
-    loadChildren: () => import('./homeTest/home2.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -21,20 +12,28 @@ const routes: Routes = [
     loadChildren: () => import('./view-graph/view-graph.module').then( m => m.ViewGraphPageModule)
   },
   {
-    path: 'view-azimuth',
-    loadChildren: () => import('./view-azimuth/view-azimuth.module').then( m => m.ViewAzimuthPageModule)
-  },
-  {
     path: 'move-solar-panel',
     loadChildren: () => import('./move-solar-panel/move-solar-panel.module').then( m => m.MoveSolarPanelPageModule)
   },
+
+  // DEBUG ROUTES
+
+  {
+    path: 'request-builder',
+    loadChildren: () => import('./request-builder/request-builder.module').then( m => m.RequestBuilderPageModule)
+  },
+
+  // RESOLVING UNKNOWN ROUTES
+
   {
     path: 'page404',
     loadChildren: () => import('./page404/page404.module').then( m => m.Page404PageModule)
   },
 
-  // The wildcard route MUST be at the end 
-  { path: '**', component: Page404Page }
+  // The wildcard route MUST be at the end. It sends all unknown routes to the
+  // 404 page.
+  { path: '**', redirectTo: '/page404' },
+
 ];
 
 @NgModule({
