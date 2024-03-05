@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ViewGraphPage } from './view-graph.page';
+import { Chart } from 'chart.js';
 
 const routes: Routes = [
   {

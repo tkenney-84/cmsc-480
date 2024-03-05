@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ViewGraphPageRoutingModule } from './view-graph-routing.module';
 
 import { ViewGraphPage } from './view-graph.page';
+import { Chart } from 'chart.js';
 
 @NgModule({
   imports: [
