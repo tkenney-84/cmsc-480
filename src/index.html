@@ -24,30 +24,37 @@
 
   <script id="azimuth-vertex-shader" type="x-shader/x-vertex">
     attribute vec4 vPosition;
+    attribute vec4 vColor;
+    varying vec4 fColor;
     void main() {
         gl_Position = vPosition;
         gl_PointSize = 5.0;
+        fColor=vColor;
     }
   </script>
   <script id="azimuth-fragment-shader" type="x-shader/x-fragment">
     precision mediump float;
-    uniform vec4 u_FragColor;
+    varying vec4 fColor;
     void main() {
-        gl_FragColor = u_FragColor;
+        gl_FragColor = fColor;
+
     }
   </script>
 
   <script id="elevation-vertex-shader" type="x-shader/x-vertex">
     attribute vec4 vPosition;
+    attribute vec4 vColor;
+    varying vec4 fColor;
     void main() {
         gl_Position = vPosition;
+        fColor=vColor;
     }
   </script>
   <script id="elevation-fragment-shader" type="x-shader/x-fragment">
     precision mediump float;
-    uniform vec4 u_FragColor;
+    varying vec4 fColor;
     void main() {
-        gl_FragColor = u_FragColor;
+        gl_FragColor = fColor;
     }
   </script>
 

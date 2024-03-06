@@ -2,7 +2,7 @@ function initElevationDiagram() {
 
   var lineLength = 0.85;
   var linePoints = [0, 0];
-
+  var colors = [1.0,1.0,0.0,1.0,1.0,0.0];
   // DON'T MODIFY CODE BELOW THIS POINT
 
   var globalCanvasID = "elevation-canvas";
@@ -37,7 +37,7 @@ function initElevationDiagram() {
 
     // Convert the points array to a Float32Array.
     var finalArray = new Float32Array(linePoints);
-
+    var finalColors = new Float32Array(colors);
     // Set up the canvas.
     var dimensions = instance.canvasDimensions();
     gl.viewport(0, 0, dimensions.width, dimensions.height);
@@ -47,12 +47,13 @@ function initElevationDiagram() {
     // DON'T MODIFY CODE BELOW THIS POINT
     var program = instance.initShaders(gl, "elevation-vertex-shader", "elevation-fragment-shader");
     gl.useProgram(program);
+
     // DO NOT MODIFY CODE ABOVE THIS POINT
 
 
     // Set the fragment color with a uniform.
-    var u_FragColor = gl.getUniformLocation(program, 'u_FragColor');
-    gl.uniform4f(u_FragColor, 1.0, 0.0, 0.0, 1.0);
+    //var u_FragColor = gl.getUniformLocation(program, 'u_FragColor');
+    //gl.uniform4f(u_FragColor, 1.0, 0.0, 0.0, 1.0);
 
     // Load the data into the GPU.
     var bufferId = gl.createBuffer();
@@ -64,6 +65,16 @@ function initElevationDiagram() {
     gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vPosition);
 
+    var cBuffer = gl.createBuffer();
+    gl.bindBuffer( gl.ARRAY_BUFFER, cBuffer );
+    gl.bufferData( gl.ARRAY_BUFFER, finalColors ,gl.STATIC_DRAW );
+ 
+    var vColor = gl.getAttribLocation( program, "vColor" );
+    gl.vertexAttribPointer( vColor, 3, gl.FLOAT, false, 0, 0 );
+    gl.enableVertexAttribArray( vColor );
+  
+
+    //render
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.LINES, 0, 2);
   });
