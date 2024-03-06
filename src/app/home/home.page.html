@@ -146,11 +146,17 @@
   
     <button class="btn-home-page-arrow-button">{{leftArrow}}</button>
   </div>
+  <br> <br><br>
+  <input type="text" id = "username" placeholder="Username" [(ngModel)] = "username" class="text-black"/>
+  <input type="text" id = "password" placeholder="Password" [(ngModel)] = "password" class="text-black"/>
+  <input type="text" id = "usertype" placeholder="User Type" [(ngModel)] = "userType" class="text-black"/>
+  <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getAccessKey()">Login User<br></button>
 
+   
   <br> <br><br>
   <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getSolarPanelPosition()">Get Solar Panel Position <br></button>
   <br>
-  <div class = "text-black">Solar Panel Position: {{solarPanelPosition}}</div>
+
   <!-- Creating User -->
   <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "createUser()">Create User</button>
   <input type="text" [(ngModel)]="createUsername" placeholder="Enter Firstname" class="text-black"/>
@@ -163,7 +169,10 @@
     <p> 
       This is only for dev purposes
     </p>  
- 
+
+    
+    <!-- <input type="text" id = "username2" placeholder="Username" [(ngModel)] = "username" class="text-black"/> -->
+     <br><br>
     <div name = "willDiv" id="willDiv" class ="text-black">Sun Altitude: {{altitude}} Sun Azimuth: {{azimuth}} </div>
 
    

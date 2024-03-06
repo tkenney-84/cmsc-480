@@ -25,6 +25,9 @@ export class HomePage implements OnInit {
   rightArrow:string="--->"
   createUsername:string=""
   createPassword:string=""
+  username:string = ""
+  password:string =""
+  userType:string = ""
   successfulCreatedUser:boolean=false
   getRandomNumbers(){
     axios.get(`api/sendRandomNumbers`).then((response)=>{
@@ -76,6 +79,17 @@ export class HomePage implements OnInit {
       }).catch((err) =>{
         console.log(err);
       });
+  }
+  getAccessKey(){
+    console.log(this.username);
+    console.log(this.userType);
+    axios.post('api/loginSolar',{
+      username:this.username,
+      password:this.password,
+      userType:this.userType
+    }).then(function(response){
+      console.log(response)
+    })
 
 
   }
