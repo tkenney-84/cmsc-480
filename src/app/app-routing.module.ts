@@ -16,13 +16,6 @@ const routes: Routes = [
     loadChildren: () => import('./move-solar-panel/move-solar-panel.module').then( m => m.MoveSolarPanelPageModule)
   },
 
-  // DEBUG ROUTES
-
-  {
-    path: 'request-builder',
-    loadChildren: () => import('./request-builder/request-builder.module').then( m => m.RequestBuilderPageModule)
-  },
-
   // RESOLVING UNKNOWN ROUTES
 
   {
