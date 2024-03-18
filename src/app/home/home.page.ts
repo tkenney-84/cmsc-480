@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment.local';
-import axios from 'axios';
 
 @Component({
   selector: 'app-homepage',
