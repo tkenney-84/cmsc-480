@@ -1,0 +1,132 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">page404</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class = "topnav">
+    <a class = "active" href ="#home">Home</a>
+    <a href = "move-solar-panel.page.html">Move Solar Panel</a>
+    <a href = "view-graph.page.html">View Graph</a>
+    <a href = "">About</a>
+    <a href = "">Contact</a>
+    <a href = "">Sign In / Logout</a>
+  </div>
+
+  <p style = "color:white; font-size:72px; margin:auto; width:50%; text-align:center; margin-bottom:10%">We can not find the page you are looking for</p>
+
+  <div class = "holder">
+    <div class = "moon"></div>
+    <div style = "color:white; text-align:center; font-size:62px; padding-top:2%; color:yellow;">Error: 404 </div>
+    <div class = "star-1"></div>
+    <div class = "star-2"></div>
+  </div>
+
+  <div style="color:white; font-size: 32px; text-align:center; position:fixed; bottom:5%; width:100%;">Can't use the solar panels during night. Go back to the <a href="/home.page.html">HOME</a> page to start exploring again.</div>
+
+  <style> 
+    .holder {
+      background: rgb(172,181,186);
+      background: linear-gradient(34deg, rgba(172,181,186,1) 1%, rgba(35,128,172,1) 25%, rgba(41,89,110,1) 61%, rgba(0,0,0,1) 96%);
+      width: 50%;
+      height: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border:white;
+      border-style:solid;
+    }
+    
+    h1 {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .moon {
+      width: 15rem;
+      height: 15rem;
+      border-radius: 50%;
+      box-shadow: 2rem 2rem 0 0 #fff77e;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .star-2 {
+      position: absolute;
+      top: calc(50% + 100px); /* Adjust distance from moon */
+      left: calc(50% - 70px); /* Adjust distance from moon */
+    }
+    
+    .star-1{
+      position: relative;
+      background-color: #FFFDFD;
+      top: calc(50% - 400px);
+      left: calc(50% - 70px);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      box-shadow: 0 0 1px 1px #FFFDFD,
+        -70px 150px 1px 0 #FFFDFD,
+        290px 150px 1px -1px #0F00BF,
+        -90px 100px 1px -1px #0C5DCC,
+        270px 10px 1px 0.11px #FFFDFD,
+        390px 80px 1px -0.6px #0C5DCC,
+        -30px 120px 3px -1px #0F00BF;
+      animation: pulsate 5s ease;
+      animation-iteration-count: infinite;
+    }
+    .star-2{
+      position: absolute;
+      background-color: #FFFF00;
+      top: clac(50% - 100px);
+      left: calc(50% - 70px);
+      width:5px;
+      height:5px;
+      border-radius: 50%;
+      box-shadow: 0 0 5px 1px #FFFF00,
+                  -99px 30px 1px 0.09px #FFFF00,
+                   355px 30px 0.5px 1px #FFFF00,
+                   400px -30px 1px -1px #FFFF00,
+                   400px 90px 1px -1px #FFFF00,
+                  -50px -30px 1px -1px #FFFF00;
+      animation: pulsate 7s ease;
+      animation-iteration-count: infinite;   
+    }
+
+      .topnav{
+        overflow:hidden;
+        background-color: #6F263D;
+        height: 4%;
+      }
+    
+      .topnav a{
+        float: center;
+        color: #F3CF3E;
+        text-align: left;
+        padding-left: 3%;
+        padding-top: 30%;
+        margin-top:4%;
+    
+      
+    
+        font-size: 17px;
+      }
+    
+      .topnav a.active {
+        background-color: #04A6D;
+        color: white;
+      }
+   
+
+  </style>
+
+</ion-content>
