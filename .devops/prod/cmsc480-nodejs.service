@@ -1,0 +1,19 @@
+[Unit]
+Description=The systemd service which deploys the CMSC480 project NodeJS backend.
+After=network.target
+
+[Service]
+User=root
+Environment="PORT=2024"
+Environment="ALLOWED_ORIGIN=https://solar.mads.commonwealthu.edu"
+Environment="DATABASE_HOST="
+Environment="DATABASE_PORT="
+Environment="DATABASE_NAME="
+Environment="DATABASE_USER="
+Environment="DATABASE_PASSWORD="
+WorkingDirectory=./web/back-end/
+ExecStart=/bin/sh -c 'node ./bin/www'
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

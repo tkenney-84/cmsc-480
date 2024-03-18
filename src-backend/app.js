@@ -13,13 +13,19 @@ global.database = mysql.createConnection({
   user     : process.env.DATABASE_USER,
   password : process.env.DATABASE_PASSWORD,
   database : process.env.DATABASE_NAME,
-  sslmode  : 'REQUIRED',
+  multipleStatements: false,
+  // sslmode  : 'REQUIRED' // DO NOT RE ENABLE THIS!
 });
 
-console.log("DATABASE", global.database);
+global.schema = global.database.config.database || "no-schema-found";
+
+console.log("DATABASE CONFIGURED?", global.database.config.user != null);
 
 global.database.connect(function(err) {
-  console.error('Error connecting to MySQL:', err);
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+    process.exit();
+  }
 });
 
 var cors = require('cors');
@@ -31,6 +37,7 @@ app.use(cors(corsOptions));
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var solarPanelMovement = require('./routes/solarPanelControl')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/solarPanelControl',solarPanelMovement)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,17 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomeRoutingModule } from './home-routing.module';
+import { ViewGraphPageRoutingModule } from './view-graph-routing.module';
 
-import { HomePage } from './home.page';
+import { ViewGraphPage } from './view-graph.page';
+import { Chart } from 'chart.js';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomeRoutingModule
+    ViewGraphPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [ViewGraphPage]
 })
-export class HomePageModule {}
+export class ViewGraphPageModule {}

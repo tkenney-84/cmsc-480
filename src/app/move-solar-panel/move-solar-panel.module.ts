@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomeRoutingModule } from './home-routing.module';
+import { MoveSolarPanelPageRoutingModule } from './move-solar-panel-routing.module';
 
-import { HomePage } from './home.page';
+import { MoveSolarPanelPage } from './move-solar-panel.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomeRoutingModule
+    MoveSolarPanelPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [MoveSolarPanelPage]
 })
-export class HomePageModule {}
+export class MoveSolarPanelPageModule {}
