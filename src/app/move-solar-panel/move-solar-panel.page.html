@@ -38,24 +38,29 @@
     </ion-row>
 
     <ion-row >
+<<<<<<< Updated upstream
       <ion-col class = "flex justify-center items-center">
         <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;">Up</button>
+=======
+      <ion-col class = "flex justify-center items-center"> 
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;" (click)="startStopUp()">Up</button>
+>>>>>>> Stashed changes
       </ion-col>
     </ion-row>
 
     <ion-row>
 
       <ion-col class = "flex justify-center items-center">
-        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E; margin-right:1%;">Left </button>
-        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;">Reset</button>
-        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E; margin-left:1%;">Right </button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E; margin-right:1%;"(click) ="startStopCounterClockwise()" >Left </button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;"(click)="getSolarPosition()">Reset</button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E; margin-left:1%;" (click) ="startStopClockwise()" >Right </button>
       </ion-col>
 
     </ion-row>
     <ion-row>
 
       <ion-col class = "flex justify-center items-center">
-        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;">down</button>
+        <button class = "w-20 h-20" style = "background-color: #6F263D; color:#F3CF3E;"(click)="startStopDown()">down</button>
       </ion-col>
     </ion-row>
 
