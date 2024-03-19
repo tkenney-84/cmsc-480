@@ -10,4 +10,51 @@
       <ion-title size="large">demodev</ion-title>
     </ion-toolbar>
   </ion-header>
+
+
+  <input type="text" id = "username" placeholder="Username" [(ngModel)] = "username" class="text-black"/>
+  <input type="text" id = "password" placeholder="Password" [(ngModel)] = "password" class="text-black"/>
+  <input type="text" id = "usertype" placeholder="User Type" [(ngModel)] = "userType" class="text-black"/>
+  <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getAccessKey()">Login User<br></button>
+
+   
+  <br> <br><br>
+  <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getSolarPanelPosition()">Get Solar Panel Position <br></button>
+  <br>
+
+  <!-- Creating User -->
+  <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "createUser()">Create User</button>
+  <input type="text" [(ngModel)]="createUsername" placeholder="Enter Firstname" class="text-black"/>
+  <input type="text" [(ngModel)]="createPassword" placeholder="Enter Lastname" class="text-black"/>
+  <div class = "text-black">{{successfulCreatedUser}}</div>
+
+
+  <!-- This is only for dev purposes -->
+  <div>
+    <p> 
+      This is only for dev purposes
+    </p>  
+
+    
+    <!-- <input type="text" id = "username2" placeholder="Username" [(ngModel)] = "username" class="text-black"/> -->
+     <br><br>
+    <div name = "willDiv" id="willDiv" class ="text-black">Sun Altitude: {{altitude}} Sun Azimuth: {{azimuth}} </div>
+
+   
+    <input type="text" placeholder="Enter User ID" class = "text-black" [(ngModel)]="id" value ="id"/>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "findUser()">Get User</button>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "getRandomNumbers()">Will's button number one</button>
+    <input type="text" id="lat" [(ngModel)]="lat" class="text-black"/>
+    <input type="text" id="long" [(ngModel)]="long" class="text-black"/>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-8 rounded-3xl position-absolute" style="top: 50%; left: 50%;"(click) = "sendLatLong()">Send Lat Long</button>
+    <div class = "text-black">FirstName:{{firstName}}  LastName:{{lastName}}</div>
+    
+    <!-- <ol>
+      <li *ngFor ="let num of randomNumbers" class="text-black">
+        {{num}}
+      </li>
+    </ol> -->
+
+  </div>  
+  
 </ion-content>

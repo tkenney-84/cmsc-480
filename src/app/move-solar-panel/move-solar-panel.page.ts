@@ -7,6 +7,29 @@ import axios from 'axios';
 })
 export class MoveSolarPanelPage implements OnInit {
  
+  
+  isDivVisible:boolean = false;
+  toggleDiv()
+  {
+    this.isDivVisible = !this.isDivVisible;
+  }
+
+  hide1:boolean = true;
+  ngIfCtrl1(){
+    this.hide1 = !this.hide1;
+  }
+
+  hide2:boolean = true;
+  ngIfCtrl2(){
+    this.hide2 = !this.hide2;
+  }
+
+  hide3:boolean = true;
+  ngIfCtrl3(){
+    this.hide3 = !this.hide3;
+  }
+
+
   isDisabled:boolean = false;
   constructor() { }
 

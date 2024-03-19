@@ -7,10 +7,129 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding;" style="color:black;  ">
-    This is a chart
-    <div style="max-width:50%; max-height:50%; min-width:25%; min-height:25%;"><canvas id="chartPower"></canvas></div>
-    <div style="max-width:50%; max-height:50%; min-width:25%; min-height:25%;"><canvas id="chartEnergy"></canvas></div>
 
+  <div class = "topnav">
+    <a class = "active" href ="#home">Home</a>
+    <a href = "move-solar-panel.page.html">Move Solar Panel</a>
+    <a href = "view-graph.page.html">View Graph</a>
+    <a href = "">About</a>
+    <a href = "">Contact</a>
+    <a href = "">Sign In / Logout</a>
   </div>
+
+  <p style = "color:black">
+    Presenting the real-time power and energy data for both solar panels
+  </p>
+
+  <div class="ion-padding;" style="color:black; justify-content:center">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div> Solar Panel 1 <canvas id="chartPower"></canvas></div>
+        </ion-col>
+        <ion-col>
+          <div> Solar Panel 1 <canvas id="chartEnergy"></canvas></div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <div> Solar Panel 2 <canvas id="chartEnergySolar2"></canvas></div>
+        </ion-col>
+        <ion-col>
+          <div> Solar Panel 2 <canvas id="chartPowerSolar2"></canvas></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <footer style = "margin-top: auto; text-align: center; color: red; background: #6F263D; height: 9%; color:#F3CF3E; margin-top:2%; padding-top:1%;">
+
+    <div class = "social-media">
+      <div class = "grid-item"> <a href = "https://www.facebook.com"> Facebook </a> </div>
+      <div class = "grid-item">Instgram </div>
+      <div class = "grid-item">Twitter </div>
+      <div class = "grid-item">LinkedIn </div>
+    </div>
+    <br>
+
+    <div class = "grid-container">
+      <div class = "grid-item">Contact Us </div>
+      <div class = "grid-item">About Us </div>
+      <div class = "grid-item">The story </div>
+      <div class = "grid-item">The History </div>
+      <div class = "grid-item">Status </div>
+      <div class = "grid-item">News </div>
+    </div>
+  </footer>
+
 </ion-content>
+
+<style>
+  .chart-column {
+    max-width: 40%; /* Adjust this value as needed */
+  }
+  
+  canvas {
+    postion:relative;
+    max-width: 80%;
+    height: auto;
+  }
+  
+</style>
+
+
+<style>
+
+  .social-media{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap:2px;
+  }
+
+  .grid-container{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+  .grid-item{
+    background-color: #6F263D;
+    padding: 2px;
+    text-align: center;
+  }
+
+
+
+  .topnav{
+    overflow:hidden;
+    background-color: #6F263D;
+    height: 4%;
+  }
+
+  .topnav a{
+    float: center;
+    color: #F3CF3E;
+    text-align: left;
+    padding-left: 3%;
+    padding-top: 30%;
+    margin-top:4%;
+    font-size: 17px;
+  }
+
+  .topnav a.active {
+    background-color: #04A6D;
+    color: white;
+  }
+
+  #azimuth-canvas{
+    border:black;
+    border-style:solid;
+  }
+
+  #elevation-canvas{
+    border:black;
+    border-style:solid;
+  }
+
+</style>
+
