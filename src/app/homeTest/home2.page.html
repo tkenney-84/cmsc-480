@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      CMSC 480 Project Template
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">CMSC 480 Project Template</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <div class="grid grid-cols-2">
+      <div class="col-auto">
+        <h1 class="font-bold text-lg mb-2">GET Request Test</h1>
+        <ion-input [(ngModel)]="getReqBody" class="p-1 rounded mb-3 max-w-[50%] mx-auto text-black" type="text"/>
+        <ion-button class="bg-slate-700 rounded p-1 mb-3" (click)="sendGET()">
+          Send GET to /testGet
+        </ion-button>
+        <h2>{{ getResultText }}</h2>
+      </div>
+      <div class="col-auto">
+        <h1 class="font-bold text-lg mb-2">POST Request Test</h1>
+        <ion-input [(ngModel)]="postReqBody" class="p-1 rounded mb-3 max-w-[50%] mx-auto text-black" type="text"/>
+        <ion-button class="bg-slate-700 rounded p-1 mb-3" (click)="sendPOST()">
+          Send POST to /testPost w/ Above Input
+        </ion-button>
+        <h2>{{ postResultText }}</h2>
+      </div>
+    </div>
+  </div>
+</ion-content>

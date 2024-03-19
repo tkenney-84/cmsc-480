@@ -1,0 +1,144 @@
+<html ng-app="ionicMakanan">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Menu</title>
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script scr="//code.ionicframework.com/nightly/css/ionic.bundle.js"></script>
+
+    <!--Imports for Web GL-->
+   <!-- <script type="text/javascript" src="webgl-utils.js"></script>
+    <script type="text/javascript" src="initShaders.js"></script> 
+    <script type="text/javascript" src=".js"></script> 
+    
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+      attribute vec4 vPosition;
+      attribute vec4 vColor;
+      varying vec4 fColor;
+      
+      void
+      main()
+      {
+         
+          gl_Position = vPosition;
+          fColor=vColor;
+      }
+      </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+      precision mediump float;
+      varying vec4 fColor;
+      void
+      main()
+      {                       
+          gl_FragColor = fColor;
+      }
+      </script> -->
+  </head> 
+
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Azimuth Diagram</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class = "topnav">
+    <a class = "active" href ="#home">Home</a>
+    <a href = "move-solar-panel.page.html">Move Solar Panel</a>
+    <a href = "view-graph.page.html">View Graph</a>
+    <a href = "">About</a>
+    <a href = "">Contact</a>
+    <a href = "">Sign In / Logout</a>
+  </div>
+
+
+  <!-- Title Bar -->
+  <br> <br>
+  <div class = "bg-white-900 text-7xl text-black" style ="margin:auto; width:50%; position:center;">
+    Azimuth Diagram
+  </div> 
+
+  <br>
+  <br>
+
+  <!-- Azimuth canvas -->
+  <ion-row class="ion-margin-top ">
+    <ion-col>   
+      <canvas id="azimuth" style="border:1px solid #000000; margin:auto; width:50%; margin-bottom: 3%;" width="35%" height="25%"></canvas>
+    </ion-col>
+  </ion-row>
+
+
+  <div class = "bg-white-900 text-7xl text-black" style ="margin:auto; position:center;">
+    Frequently Asked Questions
+  </div> 
+  <!-- The drop down menu -->
+  <div class = "flex flex-col items-center" style = "border:black; margin-left:5%; margin-right:5%; margin-bottom: 10%; border:1px solid black; background-color: #6F263D;">
+  <ion-row class="ion-margin-top" style = "display:flex; justify-content:center;  ">
+    <ion-col size="12">
+      <button ion-button full round (click)="ngIfCtrl1()" class="text-amber-900 hover:bg-neutral-50 bg-amber-400 h-12 px-6 rounded-xl" style="font-weight:bold;">What is an Azimuth Diagram?</button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!hide1" class="ion-margin-top">
+    <ion-col size="12" style = "padding:10px;">
+      <ion-label class="text-amber-50" style = "background-color: #6F263D;">An azimuth is the angular measurement in a spherical coordinate system which represents the horizontal angle from a cardinal direction.</ion-label>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row class="ion-margin-top" style="display: flex; justify-content: center;">
+    <ion-col size="12">
+      <button ion-button full round (click)="ngIfCtrl2()" class="text-amber-900 hover:bg-neutral-50 bg-amber-400 h-12 px-6 rounded-xl" style="font-weight:bold;">How to read it</button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!hide2" class="ion-margin-top">
+    <ion-col size="12" style = "padding:10px;">
+      <ion-label class="text-amber-50" style = "background-color: #6F263D;">The sphere is the sun and the yellow line is the way the sun is going</ion-label>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row class="ion-margin-top" style="display: flex; justify-content: center;">
+    <ion-col size="12">
+      <button ion-button full round (click)="ngIfCtrl3()" class="text-amber-900 hover:bg-neutral-50 bg-amber-400 h-12 px-6 rounded-xl" style="font-weight:bold;">What this map mean</button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!hide3" class="ion-margin-top" style="display: flex; justify-content: center;">
+    <ion-col size="12" style = "padding:10px;">
+      <ion-label class="text-amber-50" style = "background-color: #6F263D;">This map shows the solar panel system located at Bloomsburg University between Ben Franklin Hall and Hartline Science Center, <br> which is also right off of Laubach Drive. This shows you where the sun is at the current time.</ion-label>
+    </ion-col>
+  </ion-row>
+
+</div>
+
+<style>
+  .topnav{
+    overflow:hidden;
+    background-color: #6F263D;
+    height: 4%;
+  }
+
+  .topnav a{
+    float: center;
+    color: #F3CF3E;
+    text-align: left;
+    padding-left: 3%;
+    padding-top: 30%;
+    margin-top:4%;
+
+  
+
+    font-size: 17px;
+  }
+
+  .topnav a.active {
+    background-color: #04A6D;
+    color: white;
+  }
+
+</style>
+</ion-content>
+
+
