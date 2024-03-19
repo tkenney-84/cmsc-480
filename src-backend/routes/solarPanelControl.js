@@ -21,7 +21,7 @@ router.post('/startStopAzimuth',async function(req,res){
     }).catch(function(err){
       console.log("Error: " + err)
     })
-    console.log()
+    
    console.log(`${host}/start_azimuth?accesskey=${accessKey}&panel=Manually_Controlled`) 
    await axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
       console.log(response.data);
@@ -47,15 +47,16 @@ function sleep(ms) {
   }
 
 router.post('/startStopElevation', async function(req,res){
+console.log("line 50")  
 var direction = req.body.direction;
 var accessKey = 0;
-console.log(accessKey);
+
 await axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}&panel=Manually_Controlled`).then(function(response){
   accessKey = response.data.message;
 }).catch(function(err){
   console.log("Error: " + err)
 })
-
+console.log(accessKey);
 await axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
   console.log(response.data);
 })
