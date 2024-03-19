@@ -25,7 +25,15 @@ const routes: Routes = [
 
   // The wildcard route MUST be at the end. It sends all unknown routes to the
   // 404 page.
-  { path: '**', redirectTo: '/page404' },
+  { path: '**', redirectTo: '/page404' },  {
+    path: 'instant-power',
+    loadChildren: () => import('./instant-power/instant-power.module').then( m => m.InstantPowerPageModule)
+  },
+  {
+    path: 'demodev',
+    loadChildren: () => import('./demodev/demodev.module').then( m => m.DemodevPageModule)
+  },
+
 
 ];
 
