@@ -11,33 +11,6 @@ export class ViewGraphPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-<<<<<<< Updated upstream
-    //this.showChart();
-  }
-
-  // showChart() {
-  //   var ctx = document.getElementById('chartPower') as HTMLCanvasElement;
-  //   var chart = new Chart(ctx, {
-  //     type: 'bar',
-  //     data: {
-  //       labels:['AV','VA'],
-  //       datasets: [{
-  //         label: "Power",
-  //         backgroundColor: [
-  //           'rgba(255,99,132,0.2)', // Corrected color values
-  //           'rgba(233,93,123,0.2)'
-  //         ],
-  //         borderColor: [
-  //           'rgba(255,99,132,1)',
-  //           'rgba(255,99,132,1)'
-  //         ],
-  //         data:[20,80],
-  //         borderWidth: 1
-  //       }]
-  //     }
-   // });
-  //}
-=======
     this.showChart();
     this.showChart2();
   }
@@ -98,5 +71,4 @@ export class ViewGraphPage implements OnInit {
       }
     });
   }
->>>>>>> Stashed changes
 }
