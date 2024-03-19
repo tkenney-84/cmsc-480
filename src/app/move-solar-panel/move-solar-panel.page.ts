@@ -29,6 +29,11 @@ export class MoveSolarPanelPage implements OnInit {
     this.hide3 = !this.hide3;
   }
 
+  hide4:boolean = true;
+  ngIfCtrl4(){
+    this.hide4 = !this.hide4;
+  }
+
 
   isDisabled:boolean = false;
   constructor() { }

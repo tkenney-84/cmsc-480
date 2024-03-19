@@ -15,17 +15,11 @@ const routes: Routes = [
     path: 'move-solar-panel',
     loadChildren: () => import('./move-solar-panel/move-solar-panel.module').then( m => m.MoveSolarPanelPageModule)
   },
-
-  // RESOLVING UNKNOWN ROUTES
-
   {
     path: 'page404',
     loadChildren: () => import('./page404/page404.module').then( m => m.Page404PageModule)
   },
-
-  // The wildcard route MUST be at the end. It sends all unknown routes to the
-  // 404 page.
-  { path: '**', redirectTo: '/page404' },  {
+  {
     path: 'instant-power',
     loadChildren: () => import('./instant-power/instant-power.module').then( m => m.InstantPowerPageModule)
   },
@@ -33,6 +27,12 @@ const routes: Routes = [
     path: 'demodev',
     loadChildren: () => import('./demodev/demodev.module').then( m => m.DemodevPageModule)
   },
+
+  // RESOLVING UNKNOWN ROUTES
+  // The wildcard route MUST be at the end. It sends all unknown routes to the
+  // 404 page.
+  { path: '**', redirectTo: '/page404' },
+
 
 
 ];

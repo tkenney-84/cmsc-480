@@ -17,27 +17,27 @@
     <a href = "">Sign In / Logout</a>
   </div>
 
-  <p style = "color:black">
-    Presenting the real-time power and energy data for both solar panels
+  <p style = "color:black; padding-top:5%; padding-bottom:5%; text-align:center; font-size:32px;">
+    Presenting the real-time power and energy data for both solar panels.
   </p>
 
   <div class="ion-padding;" style="color:black; justify-content:center">
     <ion-grid>
       <ion-row>
         <ion-col>
-          <div> Solar Panel 1 <canvas id="chartPower"></canvas></div>
+          <div> Solar Panel 1 <canvas id="solarPanelOneBar"></canvas></div>
         </ion-col>
         <ion-col>
-          <div> Solar Panel 1 <canvas id="chartEnergy"></canvas></div>
+          <div> Solar Panel 1 <canvas id="solarPanelOneLine"></canvas></div>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>
-          <div> Solar Panel 2 <canvas id="chartEnergySolar2"></canvas></div>
+          <div> Solar Panel 2 <canvas id="solarPanelTwoBar"></canvas></div>
         </ion-col>
         <ion-col>
-          <div> Solar Panel 2 <canvas id="chartPowerSolar2"></canvas></div>
+          <div> Solar Panel 2 <canvas id="SolarPanelTwoLine"></canvas></div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -68,7 +68,7 @@
 
 <style>
   .chart-column {
-    max-width: 40%; /* Adjust this value as needed */
+    max-width: 40%;
   }
   
   canvas {
