@@ -117,7 +117,7 @@ router.post('/resetPanelPosition', function(req,res) {
 
 function resetElevation() {
 
-  var defaultAzimuth = 45; // Degrees
+  var defaultElevation = 45; // Degrees
   var currentElevation;
 
   requestCurrentElevation().then(function(response) {
