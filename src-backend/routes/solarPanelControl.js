@@ -133,8 +133,9 @@ function resetElevation() {
       }
     }
 
-    var movesToPerform = Math.floor(degreesToTravel / maximumSafeMovementDuration);
-    var finalMoveDuration = degreesToTravel % maximumSafeMovementDuration;
+    var secondsToMove = degreesToTravel / degreesMovedPerSecond;
+    var movesToPerform = Math.floor(secondsToMove / maximumSafeMovementDuration);
+    var finalMoveDuration = secondsToMove % maximumSafeMovementDuration;
 
     for (var i = 0; i < movesToPerform; i++) {
       setTimeout(moveElevationBySeconds(maximumSafeMovementDuration, degreesToTravel < 0), i * maximumSafeMovementDuration);
@@ -163,8 +164,9 @@ function resetAzimuth() {
       }
     }
 
-    var movesToPerform = Math.floor(degreesToTravel / maximumSafeMovementDuration);
-    var finalMoveDuration = degreesToTravel % maximumSafeMovementDuration;
+    var secondsToMove = degreesToTravel / degreesMovedPerSecond;
+    var movesToPerform = Math.floor(secondsToMove / maximumSafeMovementDuration);
+    var finalMoveDuration = secondsToMove % maximumSafeMovementDuration;
 
     for (var i = 0; i < movesToPerform; i++) {
       setTimeout(moveAzimuthBySeconds(maximumSafeMovementDuration, degreesToTravel < 0), i * maximumSafeMovementDuration);
