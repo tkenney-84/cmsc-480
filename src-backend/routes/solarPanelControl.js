@@ -7,22 +7,27 @@ var username = process.env.USERNAME_PASSWORD
 var password = process.env.USERNAME_PASSWORD
 var userType = process.env.USERTYPE
 
+var maximumMovementDuration = 5; // Seconds
+var movementDurationBuffer = 1; // Seconds
+var maximumSafeMovementDuration = maximumMovementDuration - movementDurationBuffer; // Seconds
+var degreesMovedPerSecond = 7; // Degrees. Verified through observation.
+
 router.post('/startStopAzimuth',async function(req,res){
-    
-    
+
+
   var direction = req.body.direction;
   // console.log("Line 12 back " + direction )
   // console.log(username + " " + password + " " + userType);
   var accessKey = 0;
-  
+
    await axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}&panel=Manually_Controlled`).then(function(response){
       accessKey = response.data.message;
       console.log(accessKey)
     }).catch(function(err){
       console.log("Error: " + err)
     })
-    
-   console.log(`${host}/start_azimuth?accesskey=${accessKey}&panel=Manually_Controlled`) 
+
+   console.log(`${host}/start_azimuth?accesskey=${accessKey}&panel=Manually_Controlled`)
    await axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
       console.log(response.data);
     })
@@ -38,16 +43,13 @@ router.post('/startStopAzimuth',async function(req,res){
     })
 
     res.send({success:true,message:`Successfully moved the Solar Panel`});
-    
+
 
 
 })
-function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
 
 router.post('/startStopElevation', async function(req,res){
-console.log("line 50")  
+console.log("line 50")
 var direction = req.body.direction;
 var accessKey = 0;
 
@@ -102,5 +104,103 @@ router.post('/moveAzimuth',async function(req,res){
         }
 })
 
+router.post('/resetElevation', function(req,res) {
+  resetElevation();
+});
+router.post('/resetAzimuth', function(req,res) {
+  resetAzimuth();
+});
+router.post('/resetPanelPosition', function(req,res) {
+  resetElevation();
+  resetAzimuth();
+});
+
+function resetElevation() {
+
+  var defaultAzimuth = 45; // Degrees
+  var currentElevation;
+
+  requestCurrentElevation().then(function(response) {
+
+    currentElevation = response.data.azimuth;
+
+    var degreesToTravel = defaultElevation - currentElevation;
+
+    if (degreesToTravel == 0) { // Already at default.
+      return {
+        success:true,
+        message:"Solar panel is already at default elevation."
+      }
+    }
+
+    var movesToPerform = Math.floor(degreesToTravel / maximumSafeMovementDuration);
+    var finalMoveDuration = degreesToTravel % maximumSafeMovementDuration;
+
+    for (var i = 0; i < movesToPerform; i++) {
+      setTimeout(moveElevationBySeconds(maximumSafeMovementDuration, degreesToTravel < 0), i * maximumSafeMovementDuration);
+    }
+
+    setTimeout(moveElevationBySeconds(finalMoveDuration, degreesToTravel < 0), movesToPerform * maximumSafeMovementDuration);
+
+  });
+}
+
+function resetAzimuth() {
+
+  var defaultAzimuth = 45; // Degrees
+  var currentAzimuth;
+
+  requestCurrentAzimuth().then(function(response) {
+
+    currentAzimuth = response.data.azimuth;
+
+    var degreesToTravel = defaultAzimuth - currentAzimuth;
+
+    if (degreesToTravel == 0) { // Already at default.
+      return {
+        success:true,
+        message:"Solar panel is already at default azimuth."
+      }
+    }
+
+    var movesToPerform = Math.floor(degreesToTravel / maximumSafeMovementDuration);
+    var finalMoveDuration = degreesToTravel % maximumSafeMovementDuration;
+
+    for (var i = 0; i < movesToPerform; i++) {
+      setTimeout(moveAzimuthBySeconds(maximumSafeMovementDuration, degreesToTravel < 0), i * maximumSafeMovementDuration);
+    }
+
+    setTimeout(moveAzimuthBySeconds(finalMoveDuration, degreesToTravel < 0), movesToPerform * maximumSafeMovementDuration);
+
+  });
+}
+
+function requestCurrentAzimuth() {
+  return axios.get(`http://solartracker.mads.commonwealthu.edu:2600/get_azimuth?panel=Manually_Controlled`).catch(function(err) {
+    return {
+      success:false,
+      message:"Error getting current azimuth.",
+      data: err
+    }
+  });
+}
+
+function requestCurrentElevation() {
+  return axios.get(`http://solartracker.mads.commonwealthu.edu:2600/get_elevation?panel=Manually_Controlled`).catch(function(err) {
+    return {
+      success:false,
+      message:"Error getting current elevation.",
+      data: err
+    }
+  });
+}
+
+function moveElevationBySeconds(seconds, moveDown) {
+
+}
+
+function moveAzimuthBySeconds(seconds, moveLeft) {
+
+}
 
 module.exports=router;
