@@ -176,7 +176,7 @@ function resetAzimuth() {
 }
 
 function requestCurrentAzimuth() {
-  return axios.get(`http://solartracker.mads.commonwealthu.edu:2600/get_azimuth?panel=Manually_Controlled`).catch(function(err) {
+  return axios.get(`${host}/get_azimuth?panel=Manually_Controlled`).catch(function(err) {
     return {
       success:false,
       message:"Error getting current azimuth.",
@@ -186,7 +186,7 @@ function requestCurrentAzimuth() {
 }
 
 function requestCurrentElevation() {
-  return axios.get(`http://solartracker.mads.commonwealthu.edu:2600/get_elevation?panel=Manually_Controlled`).catch(function(err) {
+  return axios.get(`${host}/get_elevation?panel=Manually_Controlled`).catch(function(err) {
     return {
       success:false,
       message:"Error getting current elevation.",
@@ -196,11 +196,54 @@ function requestCurrentElevation() {
 }
 
 function moveElevationBySeconds(seconds, moveDown) {
-
+  var directon = "Up";
+  if(moveDown){
+    directon = "Down"
+  }
+  axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}&panel=Manually_Controlled`).then(function(response){
+    var accessKey = response.data.message;
+    console.log(accessKey)
+    axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
+     axios.get(`${host}/start_${movementDirection}?panel=Manually_Controlled&accesskey=${accessKey}&direction=${direction}`).then(function(response){
+       setTimeout(function(){
+         axios.get(`${host}/stop_elevation?panel=Manually_Controlled&accesskey=${accessKey}`).then(function(response){
+           console.log("Line 70")
+         })
+       },seconds)
+ 
+ 
+     })
+   })
+ 
+ 
+ 
+ 
+   })
+  
+ 
 }
 
 function moveAzimuthBySeconds(seconds, moveLeft) {
+  var direction = "Right"
+  if(moveLeft){
+    direction = "Left"
+  }
 
+  axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}&panel=Manually_Controlled`).then(function(response){
+    var accessKey = response.data.message;
+    console.log(accessKey)
+    axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
+     axios.get(`${host}/start_${movementDirection}?panel=Manually_Controlled&accesskey=${accessKey}&direction=${direction}`).then(function(response){
+       setTimeout(function(){
+         axios.get(`${host}/stop_azimuth?panel=Manually_Controlled&accesskey=${accessKey}`).then(function(response){
+           console.log("Line 70")
+         })
+       },seconds)
+ 
+ 
+     })
+   })
+})
 }
 
 module.exports=router;
