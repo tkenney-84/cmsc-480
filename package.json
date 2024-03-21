@@ -16,7 +16,8 @@
     "build:local": "ionic build --configuration=development",
     "build:prepro": "ionic build --configuration=preproduction",
     "build:prod": "ionic build --configuration=production",
-    "sync": "npm install ionic -g --force && npm install --force && cd src-backend && npm install --force && cd .."
+    "sync": "npm install ionic -g --force && npm install --force && cd src-backend && npm install --force && cd ..",
+    "all": "echo #################################### STARTING SCRIPT CHECKLIST && echo. && echo Please make sure node is installed on your machine. If you encounter errors, or know it is not installed, install the latest version at https://nodejs.org. && echo. && echo Please ensure you have the latest .env file for the project. && echo. && echo Please ensure you have pulled the latest changes from the developer branch of the repository. && echo. && echo Do not worry about any node vulnerabilities. These will not impact your local environment, and are not present on the production server. && echo. && echo #################################### INSTALLING IONIC GLOBALLY && echo. && npm install -g @ionic/cli --force && ECHO. && echo #################################### INSTALLING NODE DEPENDENCIES && npm run sync && echo. && echo #################################### STARTING LOCAL ENVIRONMENT && npm run local"
   },
   "private": true,
   "dependencies": {
