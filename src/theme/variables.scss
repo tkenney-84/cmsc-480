@@ -74,6 +74,67 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  // The global CSS for the footer
+  footer{
+    margin-top: auto; 
+    text-align: center; color: red; 
+    background: #6F263D; 
+    height: 9%; 
+    color:#F3CF3E; 
+    margin-top:2%; 
+    padding-top:1%;
+  }
+  
+  .social-media{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap:2px;
+  }
+
+  .grid-container{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+  .grid-item{
+    background-color: #6F263D;
+    padding: 2px;
+    text-align: center;
+  }
+  
+  // The global css for the top nav
+  .topnav{
+    overflow:hidden;
+    background-color: #6F263D;
+    height: 4%;
+  }
+
+  .topnav a{
+    float: center;
+    color: #F3CF3E;
+    text-align: left;
+    padding-left: 3%;
+    padding-top: 30%;
+    margin-top:4%;
+    font-size: 17px;
+  }
+
+  .topnav a.active {
+    background-color: #04A6DD;
+    color: white;
+  }
+
+  #azimuth-canvas{
+    border:black;
+    border-style:solid;
+  }
+
+  #elevation-canvas{
+    border:black;
+    border-style:solid;
+  }
+
+
 }
 
 @media (prefers-color-scheme: dark) {
