@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import { response } from 'express';
 @Component({
   selector: 'app-move-solar-panel',
   templateUrl: './move-solar-panel.page.html',
@@ -48,8 +49,9 @@ export class MoveSolarPanelPage implements OnInit {
 
     if(buttonVal?.match('Right') !== null || buttonVal?.match('Left') !== null){
     
-      axios.post('api/solarPanelControl/startStopAzimuth',{
+      axios.post('api/solarPanelControl/movePanel',{
         direction:buttonVal,
+        duration:3000
       }).then(()=>{
         console.log("line 26");
          this.isDisabled = false;
@@ -60,8 +62,9 @@ export class MoveSolarPanelPage implements OnInit {
       });
     }else{
       
-      axios.post('api/solarPanelControl/startStopElevation',{
+      axios.post('api/solarPanelControl/movePanel',{
         direction:buttonVal,
+        duration:4000
       }).then(()=>{
         console.log("Line 37")
          this.isDisabled = false;
@@ -109,7 +112,11 @@ export class MoveSolarPanelPage implements OnInit {
   //   });
     
   // }
- 
+  resetPanel(){
+    axios.post("api/solarPanelControl/reset").then(function(response){
+      console.log(response.data)
+    })
+  }
   getSolarPosition(){
     axios.get(`api/getPanelPosition`).then((response) =>{
       console.log(response);

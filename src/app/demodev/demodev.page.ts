@@ -36,7 +36,12 @@ export class DemodevPage implements OnInit {
     })
   }
 
-
+  moveElevation(){
+     var angle = 5
+    axios.post('api/solarPanelControl/moveElevation',{
+      angle:angle
+    })
+  }
   toGraph(){
 
   }
