@@ -45,28 +45,22 @@
 
   <!-- Just shows a text and explaning what it is -->
   <!-- Maybe have it over lapped with the header just a little-->
-  <div class="bg-teal-50 text-black flex flex-row justify-center items-center min-w-18 mx-20%" style = "margin:5%; padding-left:20px; border:black; border-style:solid;border-thickness:1px; font-size:22px">
+  <div class="sm:text-sm md:text-lg lg:text-3xl xl:text-4xl bg-teal-50 text-black flex flex-row justify-center items-center min-w-18 mx-20%" style = "margin:5%; padding-left:20px; border:black; border-style:solid;border-thickness:1px;">
     Welcome to the Solar Tracker. Here is where you can learn how the position of the solar panel depends on how much energy it is getting. There are two solar pannels, the one follows the direction of the
     sun, so it gets the most optimal amount of power. The other solar panel is controlled for user use.
 </div>
-
-
-
 
   <!-- Will hold the following button that will take to a new page:
     View Graphs
     Move Solar Panel
     Azimuth Diagram
   -->
-  <div>
-    <div class = "grid grid flow-row-dense grid-cols-3 grid-rows-1 h-60" style = "padding:10px;">
-    
-        <!-- These images are just place holders until we get better pictures -->
-        <ion-button class = "btn-changePage" [routerLink] = "['/view-graph']" >View Graphs</ion-button>
-        <ion-button class = "btn-changePage" [routerLink] = "['/instant-power']" >Instant Power</ion-button>
-        <ion-button class = "btn-changePage" [routerLink] = "['/move-solar-panel']" >Move Solar Panel</ion-button>
-    </div>  
-  </div>  <br> <br> <br>
+  <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-3">
+    <ion-button class="btn-changePage sm:w-full sm:h-32 md:w-full md:h-48 lg:h-64" style = "padding-left:2%; padding-right:2%;" [routerLink]="['/view-graph']">View Graphs</ion-button>
+    <ion-button class="btn-changePage sm:w-full sm:h-32 md:w-full md:h-48 lg:h-64" style = "padding-left:2%; padding-right:2%;" [routerLink]="['/instant-power']">Instant Power</ion-button>
+    <ion-button class="btn-changePage sm:w-full sm:h-32 md:w-full md:h-48 lg:h-64" style = "padding-left:2%; padding-right:2%;" [routerLink]="['/move-solar-panel']">Move Solar Panel</ion-button>
+</div>
+
 
   <!--
     Holds information to view the following:
@@ -85,7 +79,7 @@
   <div class = "grid grid flow-row-dense grid-cols-4 grid-rows-1 h-60" style="padding:8px; margin:2px">
 
     <div class = "border-solid border-2 border-amber-500 "> 
-      <p class = "text-center text-bold text-2xl text-slate-950 ">
+      <p class = "text-center text-bold text-slate-950">
         Temperature
         <br> <br>
         High: 60F <br>
@@ -94,7 +88,7 @@
     </div>
 
     <div class = "border-solid border-2 border-amber-500"> 
-      <p class = "text-center text-bold text-2xl  text-slate-950">
+      <p class = "text-center text-bold text-slate-950">
         Total Rain Fall
         <br> <br>
         5-inches <br>
@@ -106,7 +100,7 @@
 
     <div class = "border-solid border-2 border-amber-500">
 
-      <p class = "text-center text-bold text-2xl text-slate-950">
+      <p class = "text-center text-bold text-slate-950">
         Solar Pannel Power
         <br> <br>
         Max: 43 W <br>
@@ -116,7 +110,7 @@
     </div>  
 
    <div class = "border-solid border-2 border-amber-500">
-     <p class = "text-center text-bold text-2xl text-slate-950">
+     <p class = "text-center text-bold text-slate-950">
       Wind Speed
       <br> <br>
       Max: 14 MPH <br>
