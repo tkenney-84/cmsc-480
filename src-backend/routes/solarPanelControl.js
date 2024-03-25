@@ -42,111 +42,10 @@ router.post('/movePanel',async function(req,res){
          
         })
     })
-   
-  
-      
-    
-    
-
 })
  
  
 })
-
-
-
-router.post('/startStopAzimuth',async function(req,res){
-
-
-  var direction = req.body.direction;
-  // console.log("Line 12 back " + direction )
-  // console.log(username + " " + password + " " + userType);
-  var accessKey = 0;
-
-   await axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}&panel=Manually_Controlled`).then(function(response){
-      accessKey = response.data.message;
-      console.log(accessKey)
-    }).catch(function(err){
-      console.log("Error: " + err)
-    })
-
-   console.log(`${host}/start_azimuth?accesskey=${accessKey}&panel=Manually_Controlled`)
-   await axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
-      console.log(response.data);
-    })
-
-
-    await axios.get(`${host}/start_azimuth?panel=Manually_Controlled&accesskey=${accessKey}&direction=${direction}`).catch(function(err){
-      console.log("Error: " + err)
-    })
-     await sleep(2000);
-     console.log(`${host}/stop_azimuth?accesskey=${accessKey}&panel=Manually_Controlled`);
-    await axios.get(`${host}/stop_azimuth?panel=Manually_Controlled&accesskey=${accessKey}`).catch(function(err){
-      console.log("Error: " + err)
-    })
-
-    res.send({success:true,message:`Successfully moved the Solar Panel`});
-
-
-
-})
-
-router.post('/startStopElevation', async function(req,res){
-console.log("line 50")
-var direction = req.body.direction;
-var accessKey = 0;
-
-await axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}&panel=Manually_Controlled`).then(function(response){
-  accessKey = response.data.message;
-}).catch(function(err){
-  console.log("Error: " + err)
-})
-console.log(accessKey);
-await axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
-  console.log(response.data);
-})
-console.log(`${host}/start_elevation?panel=Manually_Controlled&accesskey=${accessKey}&direction=${direction}`)
-await axios.get(`${host}/start_elevation?panel=Manually_Controlled&accesskey=${accessKey}&direction=${direction}`).catch(function(err){
-  console.log("Error: " + err)
-})
- await sleep(2000);
- console.log(`${host}/stop_elevation?panel=Manually_Controlled&accesskey=${accessKey}`)
-await axios.get(`${host}/stop_elevation?panel=Manually_Controlled&accesskey=${accessKey}`).catch(function(err){
-  console.log("Error: " + err)
-  res.send({success:false});
-})
-res.send({success:true,message:`Successfully moved the Solar Panel`});
-})
-router.post('/moveAzimuth',async function(req,res){
-    console.log(req.body)
-    var degreesToMove = req.body.angleToMove
-    var currentAzimuth = 0;
-    await axios.get(`${host}/get_azimuth?panel=Manually_Controlled`).then(function(response){
-       currentAzimuth =  response.data.azimuth;
-    })
-    if(currentAzimuth + degreesToMove >= 355 || currentAzimuth + degreesToMove < 5 ){
-        res.send({success:false,message:"The angle is to large or small to move the solar panel"})
-    }else{
-        var accessKey = 0;
-        console.log(username + " " + password + " " + userType)
-        await axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}&panel=Manually_Controlled`).then(function(response){
-            accessKey = response.data.message;
-          }).catch(function(err){
-            console.log("Error: " + err)
-          })
-          console.log(accessKey);
-          await axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(function(response){
-            console.log(response.data);
-          })
-          await axios.get(`${host}/move_azimuth?azimuth=${degreesToMove}&accesskey=${accessKey}&panel=Manually_Controlled`).catch(function(err){
-            res.send({success:false,message:"Error: " + err});
-          }).catch(function(err){
-            console("Error: " + err);
-          })
-          //res.send({success:true,message:"Successfully Moved the Solar Panel"})
-        }
-})
-
 router.post('/resetElevation', function(req,res) {
   resetElevation();
 });
@@ -199,136 +98,24 @@ router.post('/reset',function(req,res){
     axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}`).then(function(response){
         var accessKey = response.data.message
         axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(async function(response){
-         await resetAzimuth(45,azimuth,accessKey)
-       await sleep(2000)
-          await resetElevation(45,elevation,accessKey)
-        
-         
+          if(azimuth < 43 || azimuth > 50){
+              await resetAzimuth(45,azimuth,accessKey)
+          }if(elevation < 43 || azimuth > 50){
+             setTimeout(() => {
+          resetElevation(45,elevation,accessKey)
+         }, 2000 );
+          }
+         res.send({Message:"Successfully Reset Panel"})   
         })
     })
-   
-  
-      
-    
-    
-
 })
-  
-
-
-
 })
-// async function reset2(resetAngle,currentAngle,isAzimuth,accessKey){
 
-//   var degreesToMove = resetAngle - currentAngle;
-//   var n;
-//   var originalSeconds;
-//   if(degreesToMove < 0){
-//    var numSeconds = Math.abs(degreesToMove / parseFloat(7)) * 1000;
-//    originalSeconds = numSeconds;
-//     console.log(numSeconds);
-//     console.log(numSeconds / parseFloat(4000));
-//      n = Math.ceil(numSeconds / parseFloat(4000));
-  
-//     for (let i = 0; i < n ; i++) {
-//       if (numSeconds < 4000) {
-//         const angle = (numSeconds / 1000) * 7;
-//         if(isAzimuth){
-//           var result =await moveAzimuthBySeconds(Math.round(numSeconds),true,accessKey) 
-//           if(!result.success){
-//             return result;
-//           }
-          
-//         }else{
-//           var result =await moveElevationBySeconds(Math.round(numSeconds),true,accessKey) 
-//           if(!result.success){
-//             return result;
-//           }
-//         }
-//         await sleep(2000)
-//         console.log(angle);
-//         currentAngle = currentAngle - angle;
-//       } else {
-//         if(isAzimuth){
-//           var result =await moveAzimuthBySeconds(4000,true,accessKey) 
-//           if(!result.success){
-//             return result;
-//           }
-          
-//         }else{
-//           var result =await moveElevationBySeconds(4000,true,accessKey) 
-//           if(!result.success){
-//             return result;
-//           }
-//         }
-//         numSeconds = numSeconds - 4000;
-//         currentAngle = currentAngle - 28;
-//         await sleep(2000)
-       
-//       }
-//     }
-//   } else {
-//     var numSeconds = Math.abs((degreesToMove* 1000) / parseFloat(7000)) 
-  
-//     console.log(numSeconds);
-//     if(numSeconds < 4000){
-//       n = 1
-//     }else{
-//       n = Math.floor(numSeconds / parseFloat(4000));
-//     }
-     
- 
-//     console.log(n);
-//     for (let i = 0; i < n; i++) {
-//       console.log(i + " " + numSeconds + " " + currentAngle);
-//       if (numSeconds < 4000) {
-//         if(isAzimuth){
-//           var result =await moveAzimuthBySeconds(Math.round(numSeconds),false,accessKey) 
-//           if(!result.success){
-//             return result;
-//           }
-          
-//         }else{
-//           var result =await moveElevationBySeconds(Math.round(numSeconds),false,accessKey) 
-
-//           if(!result.success){
-//             return result;
-//           }
-//         }
-//         await sleep(2000)
-//         const angle = (numSeconds / 1000) * 7;
-//         console.log(currentAngle)
-//         currentAngle = currentAngle + angle;
-//       } else {
-//         if(isAzimuth){
-//           var result =moveAzimuthBySeconds(4000,false,accessKey) 
-//           if(!result.success){
-//             return result;
-//           }
-          
-//         }else{
-//           var result =moveElevationBySeconds(4000,false,accessKey) 
-//           if(!result.success){
-//             return result;
-//           }
-//         }
-//         numSeconds = numSeconds + 4000;
-//         currentAngle = currentAngle + 28;
-//         await sleep(2000)
-//       }
-//     }
-//   }
-//   console.log(Math.round(currentAngle));
-//   return {success:true,numSeconds:originalSeconds} 
-
-
-// }
 async function resetAzimuth(resetAngle,currentAngle,accessKey){
   var degreesToMove = resetAngle - currentAngle;
   var n;
   var degreesPerSecond = 7
   var panelMoveTime = 4000
- 
   var originalSeconds;
   if(degreesToMove < 0){
    var numSeconds = Math.abs(degreesToMove / parseFloat(7)) * 1000;
@@ -337,77 +124,60 @@ async function resetAzimuth(resetAngle,currentAngle,accessKey){
     console.log(numSeconds / parseFloat(panelMoveTime));
      n = Math.ceil(numSeconds / parseFloat(panelMoveTime));
     console.log(n)
-   while(currentAngle != resetAngle){
+    let isDone = false
+   while(!isDone){
       if (numSeconds < panelMoveTime) {
-        
-        
           var result =await moveAzimuthBySeconds(Math.round(numSeconds),true,accessKey).then(async function(response){
              await sleep(1000)
-            
+              isDone = true
        const angle = (Math.round(numSeconds) / 1000) * degreesPerSecond;
         console.log(angle);
-        currentAngle = currentAngle - angle;
           }).catch(function(err){
             return;
-          }) 
-        
-         break;
+          })  
       } else {
-        
         var result =await moveAzimuthBySeconds(panelMoveTime,true,accessKey).then(async function(response){
           await sleep(1000)
           numSeconds = numSeconds - panelMoveTime;
-        currentAngle = currentAngle - ((panelMoveTime/1000) * degreesMovedPerSecond);
+       
        }).catch(function(err){
          return;
-       }) 
-      
-       
-       
-      }
+       })        
+     }
     }
   } else {
-    var numSeconds = Math.abs((degreesToMove) / parseFloat(3))*1000
+    var numSeconds = Math.abs((degreesToMove) / parseFloat(degreesPerSecond))*1000
     console.log(numSeconds);
     if(numSeconds < panelMoveTime){
       n = 1
     }else{
-      n=Math.floor(numSeconds / parseFloat(4000))
+      n=Math.ceil(numSeconds / parseFloat(panelMoveTime))
     }
+    console.log(n);
    for(let i =0; i < n; i++){
-      //console.log(i + " " + numSeconds + " " + currentAngle);
-      if (numSeconds > panelMoveTime) {
-     
-        var result =await moveAzimuthBySeconds(Math.round(numSeconds),true,accessKey).then(async function(response){
+      if (numSeconds < panelMoveTime) {
+        var result =await moveAzimuthBySeconds(Math.round(numSeconds),false,accessKey).then(async function(response){
           await sleep(1000)
           const angle = (numSeconds / 1000) * degreesPerSecond;
-         
         console.log(currentAngle)
         currentAngle = currentAngle + angle;
         console.log(currentAngle)
        }).catch(function(err){
          return;
        }) 
-
         break;
-        
-       
       } else {
-        
-        var result =await moveAzimuthBySeconds(panelMoveTime,true,accessKey).then(async function(response){
+        var result =await moveAzimuthBySeconds(panelMoveTime,false,accessKey).then(async function(response){
           await sleep(1000)
-          numSeconds = numSeconds + panelMoveTime;
+          numSeconds = numSeconds - panelMoveTime;
         currentAngle = currentAngle + ((degreesPerSecond/1000) * panelMoveTime);
        }).catch(function(err){
          return;
        }) 
-      
-        
-        
       }
     }
   }
-  console.log(Math.round(currentAngle));
+
   return {success:true,numSeconds:originalSeconds} 
 }
 async function resetElevation(resetAngle,currentAngle,accessKey){
@@ -418,55 +188,42 @@ async function resetElevation(resetAngle,currentAngle,accessKey){
  
   var originalSeconds;
   if(degreesToMove < 0){
-   var numSeconds = Math.abs(degreesToMove / parseFloat(degreesPerSecond)) * 1000;
+   var numSeconds = Math.abs(degreesToMove / parseFloat(7)) * 1000;
    originalSeconds = numSeconds;
-    console.log(numSeconds);
-    console.log(numSeconds / parseFloat(panelMoveTime));
-     n = Math.ceil(numSeconds / parseFloat(panelMoveTime));
-    console.log(n)
-   while(currentAngle != resetAngle){
+    let isDone = false
+   while(!isDone){
       if (numSeconds < panelMoveTime) {
-        
-        
+          console.log("LIne 343")
           var result =await moveElevationBySeconds(Math.round(numSeconds),true,accessKey).then(async function(response){
              await sleep(1000)
-            
+              isDone = true
        const angle = (Math.round(numSeconds) / 1000) * degreesPerSecond;
         console.log(angle);
-        currentAngle = currentAngle - angle;
           }).catch(function(err){
             return;
-          }) 
-        
-         break;
+          })  
       } else {
-        
         var result =await moveElevationBySeconds(panelMoveTime,true,accessKey).then(async function(response){
           await sleep(1000)
           numSeconds = numSeconds - panelMoveTime;
-        currentAngle = currentAngle - ((panelMoveTime/1000) * degreesMovedPerSecond);
+       
        }).catch(function(err){
          return;
-       }) 
-      
-       
-       
-      }
+       })        
+     }
     }
   } else {
-    var numSeconds = Math.abs((degreesToMove) / parseFloat(3))*1000
-  
+    var numSeconds = Math.abs((degreesToMove) / parseFloat(degreesPerSecond))*1000
     console.log(numSeconds);
     if(numSeconds < panelMoveTime){
       n = 1
     }else{
-      n=Math.floor(numSeconds / parseFloat(4000))
+      n=Math.ceil(numSeconds / parseFloat(panelMoveTime))
     }
+    console.log(n);
    for(let i =0; i < n; i++){
-    
-      //console.log(i + " " + numSeconds + " " + currentAngle);
-      if (numSeconds > panelMoveTime) {
-     
+      if (numSeconds < panelMoveTime) {
+        console.log("Line 381")
         var result =await moveElevationBySeconds(Math.round(numSeconds),false,accessKey).then(async function(response){
           await sleep(1000)
           const angle = (numSeconds / 1000) * degreesPerSecond;
@@ -476,22 +233,19 @@ async function resetElevation(resetAngle,currentAngle,accessKey){
        }).catch(function(err){
          return;
        }) 
+        break;
       } else {
-        
         var result =await moveElevationBySeconds(panelMoveTime,false,accessKey).then(async function(response){
           await sleep(1000)
-          numSeconds = numSeconds + panelMoveTime;
+          numSeconds = numSeconds - panelMoveTime;
         currentAngle = currentAngle + ((degreesPerSecond/1000) * panelMoveTime);
        }).catch(function(err){
          return;
        }) 
-      
-        
-        
       }
     }
   }
-  console.log(Math.round(currentAngle));
+
   return {success:true,numSeconds:originalSeconds} 
 }
 router.post('/moveElevation',function(req,res){
@@ -571,7 +325,7 @@ function requestCurrentElevation() {
       if(moveLeft){
         direction = "Left"
       }
-      
+      console.log(direction)
       const startElevationUrl = `${host}/start_azimuth?panel=Manually_Controlled&accesskey=${accessKey}&direction=${direction}`;
       const stopElevationUrl = `${host}/stop_azimuth?panel=Manually_Controlled&accesskey=${accessKey}`;
 
@@ -582,11 +336,6 @@ function requestCurrentElevation() {
       const stopResponse = await axios.get(stopElevationUrl);
      
       resolve({ success: true });
-      
-      
-    
-    
-    
     }catch(err){
       console.log("Err : " + err);
       reject({ success: false, error: err, numSeconds: 0 });

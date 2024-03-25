@@ -41,7 +41,7 @@ export class MoveSolarPanelPage implements OnInit {
 
   movePanel(event: MouseEvent){
     this.isDisabled = true;
-    var self = this;
+    
     const directionButton = event.target as HTMLButtonElement;
     var buttonVal = directionButton.textContent;
     
@@ -74,57 +74,12 @@ export class MoveSolarPanelPage implements OnInit {
     }
     
   }
-
-  // startStopClockwise(){
-  //   this.isDisabled = true;
-  //   axios.post('api/solarPanelControl/startStopAzimuth',{
-  //     direction:"Right",
-  //   }).then(()=>{
-  //      this.isDisabled = false;
-  //   });
-   
-  // }
-  // startStopUp(){
-  //   this.isDisabled = true;
-  //   axios.post('api/solarPanelControl/startStopElevation',{
-  //     direction:"Up",
-  //     }).then(()=>{
-  //       this.isDisabled = false;
-  //     });
-
-  // }
-  // startStopCounterClockwise(){
-  //   this.isDisabled = true;
-  //   axios.post('api/solarPanelControl/startStopAzimuth',{
-  //     direction:"Left",
-  //    }).then(()=>{
-  //     this.isDisabled = false;
-  //   });
-    
-    
-  // }
-  // startStopDown(){
-  //   this.isDisabled = true;
-  //   axios.post('api/solarPanelControl/startStopElevation',{
-  //     direction:"Down",
-  //   }).then(()=>{
-  //     this.isDisabled = false;
-  //   });
-    
-  // }
   resetPanel(){
-    axios.post("api/solarPanelControl/reset").then(function(response){
-      console.log(response.data)
+    this.isDisabled = true
+    axios.post("api/solarPanelControl/reset").then((response) =>{
+      this.isDisabled = false
     })
   }
-  getSolarPosition(){
-    axios.get(`api/getPanelPosition`).then((response) =>{
-      console.log(response);
-  }).catch((err) =>{
-    console.log(err);
-  });
-  }
-
   ngOnInit() {
   }
 
