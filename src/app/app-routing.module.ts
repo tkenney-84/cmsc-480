@@ -32,9 +32,6 @@ const routes: Routes = [
   // The wildcard route MUST be at the end. It sends all unknown routes to the
   // 404 page.
   { path: '**', redirectTo: '/page404' },
-
-
-
 ];
 
 @NgModule({
