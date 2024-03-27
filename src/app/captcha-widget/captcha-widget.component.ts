@@ -13,10 +13,6 @@ export class CaptchaWidgetComponent  implements OnDestroy, OnInit {
   captchaImportReference: any;
   captchaRenderReference: any;
 
-  validateCaptcha() {
-    console.log("Captcha Validated");
-  }
-
   ngOnInit() {
     this.captchaRenderReference = this.renderer.createElement('script');
     this.captchaRenderReference.text = `
@@ -24,16 +20,14 @@ export class CaptchaWidgetComponent  implements OnDestroy, OnInit {
       turnstile.render('#captcha-widget', {
           sitekey: '0x4AAAAAAAVusuoIuJLlz3oM',
           callback: function(token) {
-              console.log('Challenge Success ' + token);
+            axios.post('api/captcha/processCaptchaToken', { token: token }).then((response) => {
+              console.log(response);
+            });
           },
       });
     };
     `
     this.captchaRenderReference.type = 'text/javascript';
-
-    // Optionally (if needed by the provider):
-    // this.captchaRenderReference.async = true;
-    // this.captchaRenderReference.defer = true;
 
     this.renderer.appendChild(this.document.head, this.captchaRenderReference);
 
@@ -41,8 +35,6 @@ export class CaptchaWidgetComponent  implements OnDestroy, OnInit {
     this.captchaImportReference.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback';
     this.captchaImportReference.type = 'text/javascript';
 
-    // Optionally (if needed by the provider):
-    // this.captchaImportReference.async = true;
     this.captchaImportReference.defer = true;
 
     this.renderer.appendChild(this.document.head, this.captchaImportReference);
