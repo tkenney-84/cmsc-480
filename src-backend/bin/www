@@ -9,11 +9,11 @@ var app = require('../app');
 var debug = require('debug')('src-backend:server');
 var http = require('http');
 
-console.log("======== START BACKEND WORK");
+console.info("======== START BACKEND WORK");
 
-console.log("INITIALIZED");
+console.info("INITIALIZED");
 
-console.log("ENVIRONMENT CONFIGURED?", dotenv.parsed != {} && dotenv.parsed != null);
+console.info("ENVIRONMENT CONFIGURED?", dotenv.parsed != {} && dotenv.parsed != null);
 
 /**
  * Get port from environment and store in Express.
@@ -22,7 +22,7 @@ console.log("ENVIRONMENT CONFIGURED?", dotenv.parsed != {} && dotenv.parsed != n
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-console.log("PORT", port);
+console.info("PORT", port);
 
 /**
  * Create HTTP server.
@@ -30,9 +30,9 @@ console.log("PORT", port);
 
 var server = http.createServer(app);
 
-console.log("SERVER CREATED");
+console.info("SERVER CREATED");
 
-console.log("======== END BACKEND WORK");
+console.info("======== END BACKEND WORK");
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -42,7 +42,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-console.log("SERVER LISTENING");
+console.info("SERVER LISTENING");
 
 /**
  * Normalize a port into a number, string, or false.
@@ -69,7 +69,11 @@ function normalizePort(val) {
  */
 
 function onError(error) {
+
   if (error.syscall !== 'listen') {
+
+    // Server kill is intentional here. If there is an error which the server
+    // has returned, it is assumed the backend will be unable to function.
     throw error;
   }
 
@@ -84,7 +88,7 @@ function onError(error) {
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error(bind + ' is already in use.');
       process.exit(1);
       break;
     default:
