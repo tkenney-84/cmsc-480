@@ -74,7 +74,7 @@ const apiLimiter = rateLimiter({
 app.use(apiLimiter);
 
 // Set the CAPTCHA secret for the backend server.
-global.captchaSecret = process.env.CAPTCHA_SECRET || "No CAPTCHA secret found in environment configuration.";
+global.captchaSecret = process.env.CAPTCHA_SECRET || "0x0";
 
 // Import all route files for the backend server.
 var indexRouter = require("./routes/index");
