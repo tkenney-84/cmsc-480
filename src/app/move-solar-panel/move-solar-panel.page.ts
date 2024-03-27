@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CaptchaWidgetComponent } from '../captcha-widget/captcha-widget.component';
 import { WebglAzimuthComponent } from '../webgl-azimuth/webgl-azimuth.component';
 import { WebglElevationComponent } from '../webgl-elevation/webgl-elevation.component';
+import { ToastService } from '../toast.service';
 @Component({
   selector: 'app-move-solar-panel',
   templateUrl: './move-solar-panel.page.html',
@@ -48,7 +49,7 @@ export class MoveSolarPanelPage implements AfterViewInit, OnDestroy, OnInit {
 
 
   isDisabled:boolean = false;
-  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document, private toast: ToastService) { }
 
   movePanel(event: MouseEvent){
     this.isDisabled = true;
@@ -96,14 +97,13 @@ export class MoveSolarPanelPage implements AfterViewInit, OnDestroy, OnInit {
    * Reloads the WebGL components.
    */
   async reloadWebGL() {
-    // Use the onNextTick function to force a synced update of the WebGL components.
-
-
-
     this.webGLAzimuthRef.clear();
     this.webGLElevationRef.clear();
     this.webGLAzimuthRef.createComponent(WebglAzimuthComponent);
     this.webGLElevationRef.createComponent(WebglElevationComponent);
+
+    this.toast.fireToast('success', 'WebGL components reloaded successfully.');
+
   }
 
   ngOnInit() {

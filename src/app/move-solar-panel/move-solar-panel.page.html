@@ -41,6 +41,10 @@
       <ion-button (click)="reloadWebGL()" class="text-black border-black">Debug - Reload Canvases</ion-button>
     </ion-row>
 
+    <ion-row class= "flex justify-center items-center">
+      <ng-template #captchaWidget></ng-template>
+    </ion-row>
+
     <ion-row >
       <ion-col class = "flex justify-center items-center">
         <button class = "w-20 h-20" [disabled] = "isDisabled" style = "background-color: #6F263D; color:#F3CF3E;" (click) = "movePanel($event)">Up</button>
@@ -61,9 +65,6 @@
       <ion-col class = "flex justify-center items-center">
         <button class = "w-20 h-20" [disabled] = "isDisabled" style = "background-color: #6F263D; color:#F3CF3E;" (click) = "movePanel($event)">Down</button>
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ng-template #captchaWidget></ng-template>
     </ion-row>
 
   </ion-grid>
