@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import axios from 'axios';
 import { response } from 'express';
+import { CaptchaWidgetComponent } from '../captcha-widget/captcha-widget.component';
 @Component({
   selector: 'app-move-solar-panel',
   templateUrl: './move-solar-panel.page.html',
   styleUrls: ['./move-solar-panel.page.scss'],
 })
-export class MoveSolarPanelPage implements OnInit {
- 
-  
+
+export class MoveSolarPanelPage implements AfterViewInit {
+
+  @ViewChild('captchaWidget', { read: ViewContainerRef }) captchaWidgetRef!: ViewContainerRef;
+
+
   isDivVisible:boolean = false;
   toggleDiv()
   {
@@ -41,27 +45,27 @@ export class MoveSolarPanelPage implements OnInit {
 
   movePanel(event: MouseEvent){
     this.isDisabled = true;
-    
+
     const directionButton = event.target as HTMLButtonElement;
     var buttonVal = directionButton.textContent;
-    
+
     console.log(buttonVal)
 
     if(buttonVal?.match('Right') !== null || buttonVal?.match('Left') !== null){
-    
+
       axios.post('api/solarPanelControl/movePanel',{
         direction:buttonVal,
         duration:3000
       }).then(()=>{
         console.log("line 26");
          this.isDisabled = false;
-         
+
       }).catch((err)=>{
-        
+
         console.log("Error: "  +err)
       });
     }else{
-      
+
       axios.post('api/solarPanelControl/movePanel',{
         direction:buttonVal,
         duration:4000
@@ -72,7 +76,7 @@ export class MoveSolarPanelPage implements OnInit {
         console.log("Error: "  +err)
       });
     }
-    
+
   }
   resetPanel(){
     this.isDisabled = true
@@ -80,7 +84,10 @@ export class MoveSolarPanelPage implements OnInit {
       this.isDisabled = false
     })
   }
-  ngOnInit() {
+
+  ngAfterViewInit() {
+    this.captchaWidgetRef.clear();
+    this.captchaWidgetRef.createComponent(CaptchaWidgetComponent);
   }
 
 }

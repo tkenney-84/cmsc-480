@@ -5,8 +5,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var mysql = require("mysql2");
-const rateLimiter = require("express-rate-limit");
 var cors = require("cors");
+const rateLimiter = require("express-rate-limit");
 
 // Declare a new instance of the express NodeJS framework for use as our
 // backend server.
@@ -73,11 +73,15 @@ const apiLimiter = rateLimiter({
 // Apply the rate limiter to all requests to this backend server..
 app.use(apiLimiter);
 
+// Set the CAPTCHA secret for the backend server.
+global.captchaSecret = process.env.CAPTCHA_SECRET || "No CAPTCHA secret found in environment configuration.";
+
 // Import all route files for the backend server.
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var solarPanelMovement = require("./routes/solarPanelControl");
 var solarData = require("./routes/solarData");
+var captchaRouter = require("./routes/captcha");
 
 // Support for view functionality offered by ExpressJS.
 // Not explicitly used in this project, but left in for fear of dependency.
@@ -93,6 +97,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Declare base URL stub for all route files.
 app.use("/", indexRouter);
+app.use("/captcha", captchaRouter);
 app.use("/users", usersRouter);
 app.use("/solarPanelControl", solarPanelMovement);
 app.use("/solarData", solarData);

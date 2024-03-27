@@ -18,7 +18,7 @@
   </div>
 
   <div style = "color:black; padding-top:3%; font-size:42px;" class= "flex justify-center items-center" >
-    Move Solar Panel 
+    Move Solar Panel
   </div>
 
 
@@ -58,15 +58,18 @@
         <button class = "w-20 h-20" [disabled] = "isDisabled" style = "background-color: #6F263D; color:#F3CF3E;" (click) = "movePanel($event)">Down</button>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ng-template #captchaWidget></ng-template>
+    </ion-row>
 
   </ion-grid>
 
   <br><br><br><br>
 
-    
+
   <div class = "bg-white-900 text-3xl text-black" style ="position:center;">
     Frequently Asked Questions
-  </div> 
+  </div>
   <!-- The drop down menu -->
   <div class = "flex flex-col items-center" style = "border:black; margin-left:5%; margin-right:5%; margin-bottom: 10%; border:1px solid black; background-color: #6F263D;">
   <ion-row class="ion-margin-top" style = "display:flex; justify-content:center;  ">
@@ -89,7 +92,7 @@
       <ion-label class="text-amber-50" style = "background-color: #6F263D;">The sphere is the sun and the yellow line is the way the sun is going</ion-label>
     </ion-col>
   </ion-row>
-  
+
   <ion-row class="ion-margin-top" style="display: flex; justify-content: center;">
     <ion-col size="12">
       <button ion-button full round (click)="ngIfCtrl3()" class="text-amber-900 hover:bg-neutral-50 bg-amber-400 h-12 px-6 rounded-xl" style="font-weight:bold;">What this map mean</button>
