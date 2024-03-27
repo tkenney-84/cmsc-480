@@ -1,8 +1,8 @@
-function initElevationDiagram() {
+setTimeout(function initElevationDiagram() {
 
   var lineLength = 0.85;
   var linePoints = [0, 0];
-  var colors = [1.0,1.0,0.0,1.0,1.0,0.0];
+  var colors = [0.0,1.0,0.0,0.0,1.0,0.0];
   // DON'T MODIFY CODE BELOW THIS POINT
 
   var globalCanvasID = "elevation-canvas";
@@ -68,14 +68,14 @@ function initElevationDiagram() {
     var cBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, cBuffer );
     gl.bufferData( gl.ARRAY_BUFFER, finalColors ,gl.STATIC_DRAW );
- 
+
     var vColor = gl.getAttribLocation( program, "vColor" );
     gl.vertexAttribPointer( vColor, 3, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( vColor );
-  
+
 
     //render
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.LINES, 0, 2);
   });
-};
+}, 0);

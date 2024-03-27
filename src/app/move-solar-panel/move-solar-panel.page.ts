@@ -1,17 +1,24 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, Inject, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import axios from 'axios';
-import { response } from 'express';
 import { CaptchaWidgetComponent } from '../captcha-widget/captcha-widget.component';
+import { WebglAzimuthComponent } from '../webgl-azimuth/webgl-azimuth.component';
+import { WebglElevationComponent } from '../webgl-elevation/webgl-elevation.component';
 @Component({
   selector: 'app-move-solar-panel',
   templateUrl: './move-solar-panel.page.html',
   styleUrls: ['./move-solar-panel.page.scss'],
 })
 
-export class MoveSolarPanelPage implements AfterViewInit {
+export class MoveSolarPanelPage implements AfterViewInit, OnDestroy, OnInit {
 
   @ViewChild('captchaWidget', { read: ViewContainerRef }) captchaWidgetRef!: ViewContainerRef;
 
+  @ViewChild('webGLAzimuth', { read: ViewContainerRef }) webGLAzimuthRef!: ViewContainerRef;
+
+  @ViewChild('webGLElevation', { read: ViewContainerRef }) webGLElevationRef!: ViewContainerRef;
+
+  webGLResourcesReference: any;
 
   isDivVisible:boolean = false;
   toggleDiv()
@@ -41,7 +48,7 @@ export class MoveSolarPanelPage implements AfterViewInit {
 
 
   isDisabled:boolean = false;
-  constructor() { }
+  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) { }
 
   movePanel(event: MouseEvent){
     this.isDisabled = true;
@@ -85,9 +92,46 @@ export class MoveSolarPanelPage implements AfterViewInit {
     })
   }
 
+  /**
+   * Reloads the WebGL components.
+   */
+  async reloadWebGL() {
+    // Use the onNextTick function to force a synced update of the WebGL components.
+
+
+
+    this.webGLAzimuthRef.clear();
+    this.webGLElevationRef.clear();
+    this.webGLAzimuthRef.createComponent(WebglAzimuthComponent);
+    this.webGLElevationRef.createComponent(WebglElevationComponent);
+  }
+
+  ngOnInit() {
+
+    // Make the reload web gl function available in the global scope.
+    // Hence making it available to the WebGL JS files.
+    (window as any)['reloadWebGL'] = this.reloadWebGL.bind(this);
+
+    // Import the WebGL resources script for use.
+    this.webGLResourcesReference = this.renderer.createElement('script');
+    this.webGLResourcesReference.src = '../../assets/webgl/.webgl-resources.js';
+    this.webGLResourcesReference.type = 'text/javascript';
+    this.renderer.appendChild(this.document.head, this.webGLResourcesReference);
+  }
+
   ngAfterViewInit() {
     this.captchaWidgetRef.clear();
     this.captchaWidgetRef.createComponent(CaptchaWidgetComponent);
+    this.reloadWebGL();
+  }
+
+  ngOnDestroy() {
+
+    // Remove the WebGL resources script from the DOM.
+    this.renderer.removeChild(this.document.head, this.webGLResourcesReference);
+
+    // Remove the reloadWebGL function from the global scope.
+    delete (window as any)['reloadWebGL'];
   }
 
 }

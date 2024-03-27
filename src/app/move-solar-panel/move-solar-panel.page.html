@@ -30,11 +30,15 @@
 
     <ion-row>
       <ion-col class= "flex justify-center items-center">
-         <canvas id="azimuth-canvas" width="300" height="300"></canvas>
+        <ng-template #webGLAzimuth></ng-template>
       </ion-col>
       <ion-col class= "flex justify-center items-center">
-        <canvas id="elevation-canvas" width="300" height="300"></canvas>
+        <ng-template #webGLElevation></ng-template>
       </ion-col>
+    </ion-row>
+
+    <ion-row class= "flex justify-center items-center">
+      <ion-button (click)="reloadWebGL()" class="text-black border-black">Debug - Reload Canvases</ion-button>
     </ion-row>
 
     <ion-row >
