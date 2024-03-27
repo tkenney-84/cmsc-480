@@ -15,7 +15,7 @@ export class CaptchaWidgetComponent  implements OnDestroy, OnInit {
   captchaRenderReference: any;
 
   validateAndStoreToken(token: string) {
-    axios.post('http://localhost:2024/captcha/processCaptchaToken',
+    axios.post('api/captcha/processCaptchaToken',
     { token: token }).then((response) => {
 
       if (response.data.success) {
