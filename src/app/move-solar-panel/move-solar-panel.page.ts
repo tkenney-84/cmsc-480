@@ -63,7 +63,7 @@ export class MoveSolarPanelPage implements AfterViewInit, OnDestroy, OnInit {
 
       axios.post('api/solarPanelControl/movePanel',{
         direction:buttonVal,
-        duration:3000
+        duration:1000
       }).then(()=>{
         console.log("line 26");
          this.isDisabled = false;
@@ -76,7 +76,7 @@ export class MoveSolarPanelPage implements AfterViewInit, OnDestroy, OnInit {
 
       axios.post('api/solarPanelControl/movePanel',{
         direction:buttonVal,
-        duration:4000
+        duration:1000
       }).then(()=>{
         console.log("Line 37")
          this.isDisabled = false;

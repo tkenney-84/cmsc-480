@@ -8,19 +8,10 @@ var username = process.env.USERNAME_PASSWORD
 var password = process.env.USERNAME_PASSWORD
 var userType = process.env.USERTYPE
 
-var maximumMovementDuration = 5; // Seconds
-var movementDurationBuffer = 1; // Seconds
-var maximumSafeMovementDuration = maximumMovementDuration - movementDurationBuffer; // Seconds
-var degreesMovedPerSecond = 7; // Degrees. Verified through observation.
-
-
 router.post('/movePanel',async function(req,res){
-  //var movementDirection = req.body.movementDirection
   var direction = req.body.direction
   var duration = req.body.duration
-  axios.get(`${host}/get_position?panel=Manually_Controlled`).then(async function(response){
-
-          
+  axios.get(`${host}/get_position?panel=Manually_Controlled`).then(async function(response){ 
     const elevation = response.data.elevation;
     const azimuth = response.data.azimuth;
     axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}`).then(function(response){
@@ -46,53 +37,10 @@ router.post('/movePanel',async function(req,res){
  
  
 })
-router.post('/resetElevation', function(req,res) {
-  resetElevation();
-});
-router.post('/resetAzimuth', function(req,res) {
-  resetAzimuth();
-});
-router.post('/resetPanelPosition', function(req,res) {
-  resetElevation();
-  resetAzimuth();
-});
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-// function resetElevation() {
 
-//   var defaultElevation = 45; // Degrees
-//   var currentElevation;
 
-//   requestCurrentElevation().then(function(response) {
-
-//     currentElevation = response.data.azimuth;
-
-//     var degreesToTravel = defaultElevation - currentElevation;
-
-//     if (degreesToTravel == 0) { // Already at default.
-//       return {
-//         success:true,
-//         message:"Solar panel is already at default elevation."
-//       }
-//     }
-
-//     var secondsToMove = degreesToTravel / degreesMovedPerSecond;
-//     var movesToPerform = Math.floor(secondsToMove / maximumSafeMovementDuration);
-//     var finalMoveDuration = secondsToMove % maximumSafeMovementDuration;
-
-//     for (var i = 0; i < movesToPerform; i++) {
-//       setTimeout(moveElevationBySeconds(maximumSafeMovementDuration, degreesToTravel < 0), i * maximumSafeMovementDuration);
-//     }
-
-//     setTimeout(moveElevationBySeconds(finalMoveDuration, degreesToTravel < 0), movesToPerform * maximumSafeMovementDuration);
-
-//   });
-// }
 router.post('/reset',function(req,res){
   axios.get(`${host}/get_position?panel=Manually_Controlled`).then(async function(response){
-
-          
     const elevation = response.data.elevation;
     const azimuth = response.data.azimuth;
     axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}`).then(function(response){
@@ -193,7 +141,6 @@ async function resetElevation(resetAngle,currentAngle,accessKey){
     let isDone = false
    while(!isDone){
       if (numSeconds < panelMoveTime) {
-          console.log("LIne 343")
           var result =await moveElevationBySeconds(Math.round(numSeconds),true,accessKey).then(async function(response){
              await sleep(1000)
               isDone = true
@@ -223,7 +170,6 @@ async function resetElevation(resetAngle,currentAngle,accessKey){
     console.log(n);
    for(let i =0; i < n; i++){
       if (numSeconds < panelMoveTime) {
-        console.log("Line 381")
         var result =await moveElevationBySeconds(Math.round(numSeconds),false,accessKey).then(async function(response){
           await sleep(1000)
           const angle = (numSeconds / 1000) * degreesPerSecond;
@@ -248,74 +194,6 @@ async function resetElevation(resetAngle,currentAngle,accessKey){
 
   return {success:true,numSeconds:originalSeconds} 
 }
-router.post('/moveElevation',function(req,res){
-  var angleToMove = req.body.angle
-  axios.get(`${host}/login?username=${username}&password=${password}&usertype=${userType}`).then(function(response){
-    var accessKey = response.data.message
-    axios.get(`${host}/is_control_user?accesskey=${accessKey}&panel=Manually_Controlled`).then(async function(response){
-     
-     axios.get(`${host}/move_elevation&elevation=${angleToMove}&accesskey=${accessKey}&panel=Manually_Controlled`).catch(function(err){
-      console.log("Err: " + err)
-     })
-     
-    }).catch(function(err){
-      console.log("Err: " + err)
-    })
-})
-
-})
-// function resetAzimuth() {
-
-//   var defaultAzimuth = 45; // Degrees
-//   var currentAzimuth;
-
-//   requestCurrentAzimuth().then(function(response) {
-
-//     currentAzimuth = response.data.azimuth;
-
-//     var degreesToTravel = defaultAzimuth - currentAzimuth;
-
-//     if (degreesToTravel == 0) { // Already at default.
-//       return {
-//         success:true,
-//         message:"Solar panel is already at default azimuth."
-//       }
-//     }
-
-//     var secondsToMove = degreesToTravel / degreesMovedPerSecond;
-//     var movesToPerform = Math.floor(secondsToMove / maximumSafeMovementDuration);
-//     var finalMoveDuration = secondsToMove % maximumSafeMovementDuration;
-
-//     for (var i = 0; i < movesToPerform; i++) {
-//       setTimeout(() => { moveAzimuthBySeconds(maximumSafeMovementDuration, degreesToTravel < 0) }, i * maximumSafeMovementDuration);
-//     }
-
-//     setTimeout(() => { moveAzimuthBySeconds(finalMoveDuration, degreesToTravel < 0) }, movesToPerform * maximumSafeMovementDuration);
-
-//   });
-// }
-
-function requestCurrentAzimuth() {
-  return axios.get(`${host}/get_azimuth?panel=Manually_Controlled`).catch(function(err) {
-    return {
-      success:false,
-      message:"Error getting current azimuth.",
-      data: err
-    }
-  });
-}
-
-function requestCurrentElevation() {
-  return axios.get(`${host}/get_elevation?panel=Manually_Controlled`).catch(function(err) {
-    return {
-      success:false,
-      message:"Error getting current elevation.",
-      data: err
-    }
-  });
-}
-
-
 
 
  function moveAzimuthBySeconds(seconds, moveLeft,accessKey) {
@@ -370,6 +248,8 @@ function moveElevationBySeconds(seconds, moveDown, accessKey) {
   });
 }
 
-
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 module.exports=router;
